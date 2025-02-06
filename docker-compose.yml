@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres
+    container_name: container_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: container_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: airbnb@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "5051:80"
+    depends_on:
+      - postgres
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: container_php
+    restart: always
+    volumes:
+      - ./project:/var/www/html/
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
