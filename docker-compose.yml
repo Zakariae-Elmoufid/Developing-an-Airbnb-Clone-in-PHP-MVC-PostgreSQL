@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: database
+      POSTGRES_DB: airbnb
     ports:
       - "5432:5432"
 
