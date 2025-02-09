@@ -14,8 +14,9 @@
     <nav class="bg-white shadow-md fixed w-full z-50">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <!-- Logo -->
-            <div class="text-rose-500 text-2xl font-bold">airbnb</div>
-            
+             <div class="w-26">
+                <img src="../../public/asset/images/logo.png" alt="airbnb">
+             </div>
             <!-- Search Bar -->
             <div class="hidden md:flex items-center shadow-sm border rounded-full px-4 py-2 hover:shadow-md transition">
                 <input type="text" placeholder="Where are you going?" class="outline-none bg-transparent" />
