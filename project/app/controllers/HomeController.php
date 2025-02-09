@@ -3,7 +3,7 @@ namespace App\controllers;
 class HomeController{
 
   public function index(){
-    echo '3la slama';
+    include(__DIR__ ."/../views/Home.php");  
   }
 
 
