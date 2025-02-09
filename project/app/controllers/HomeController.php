@@ -1,9 +1,13 @@
 <?php 
 namespace App\controllers;
-class HomeController{
+
+use App\core\Controller;
+
+
+class HomeController extends Controller{
 
   public function index(){
-    include(__DIR__ ."/../views/Home.php");  
+    $this->view('Home'); 
   }
 
 
