@@ -94,6 +94,8 @@ CREATE TABLE Booking (
     numberOfGuests INT NOT NULL,
     totalPrice FLOAT NOT NULL,
     status booking_enum  DEFAULT 'active'
+     traveler_id INT,
+   FOREIGN KEY (traveler_id) REFERENCES "Traveler"(id)
 );
 
 create type review_enum  as ENUM('approved', 'pending', 'rejected');

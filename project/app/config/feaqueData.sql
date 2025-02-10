@@ -52,16 +52,10 @@ VALUES
 -- Insert sample Bookings
 INSERT INTO Booking (accommodation_id, checkInDate, checkOutDate, numberOfGuests, totalPrice, status)
 VALUES
-(1, '2025-02-01', '2025-02-07', 2, 1000.0, 'active'),
-(2, '2025-02-05', '2025-02-10', 1, 50.0, 'active'),
-(3, '2025-02-10', '2025-02-15', 3, 450.0, 'active'),
-(4, '2025-02-11', '2025-02-14', 4, 1400.0, 'active'),
-(5, '2025-02-20', '2025-02-25', 2, 200.0, 'active'),
-(6, '2025-02-25', '2025-03-01', 3, 300.0, 'active'),
-(7, '2025-03-01', '2025-03-05', 4, 1600.0, 'active'),
-(8, '2025-03-05', '2025-03-10', 1, 150.0, 'active'),
-(9, '2025-03-10', '2025-03-15', 2, 400.0, 'active'),
-(10, '2025-03-15', '2025-03-20', 5, 1750.0, 'active');
+(1, '2025-02-01', '2025-02-07', 2, 1000.0, 'active',3),
+(2, '2025-02-05', '2025-02-10', 1, 50.0, 'active',6),
+(3, '2025-02-10', '2025-02-15', 3, 450.0, 'active',9),
+
 
 -- Insert sample Reviews
 INSERT INTO Review (booking_id, rating, comment, status)
