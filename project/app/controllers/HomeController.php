@@ -1,9 +1,13 @@
 <?php 
 namespace App\controllers;
-class HomeController{
+
+use App\core\Controller;
+
+
+class HomeController extends Controller{
 
   public function index(){
-    echo '3la slama';
+    $this->view('Home'); 
   }
 
 

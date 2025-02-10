@@ -18,8 +18,7 @@ class Router {
         $requestUri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         
-           echo $requestMethod, $requestUri;
-         print_r(self::$routes);
+       
         foreach (self::$routes as $route) {
             if ($route['route'] === $requestUri && $route['method'] === $requestMethod) {
                 [$controller, $method] = explode('@', $route['action']);
