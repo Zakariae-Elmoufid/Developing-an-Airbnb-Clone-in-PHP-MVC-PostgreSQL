@@ -50,26 +50,26 @@ VALUES
 (1, 'Desert Retreat', 'A retreat in the desert', 1, '444 Desert Blvd.', 550.0, 5, ARRAY['photo10.jpg'], 'available', TRUE);
 
 -- Insert sample Bookings
-INSERT INTO Booking (accommodation_id, checkInDate, checkOutDate, numberOfGuests, totalPrice, status)
-VALUES
-(1, '2025-02-01', '2025-02-07', 2, 1000.0, 'active',3),
-(2, '2025-02-05', '2025-02-10', 1, 50.0, 'active',6),
-(3, '2025-02-10', '2025-02-15', 3, 450.0, 'active',9),
 
+INSERT INTO Booking (accommodation_id, checkInDate, checkOutDate, numberOfGuests, totalPrice, status,traveler_id)
+VALUES
+(1, '2025-02-01', '2025-02-07', 2, 1000.0, 'active',1),
+(2, '2025-02-05', '2025-02-10', 1, 50.0, 'active',2),
+(3, '2025-02-10', '2025-02-15', 3, 450.0, 'active',3);
 
 -- Insert sample Reviews
 INSERT INTO Review (booking_id, rating, comment, status)
 VALUES
-(1, 5, 'Excellent stay!', 'approved'),
-(2, 3, 'Good, but could be better.', 'approved'),
-(3, 4, 'Nice place, but a bit noisy.', 'approved'),
-(4, 5, 'Perfect for our family!', 'approved'),
-(5, 2, 'Too small for the price.', 'pending'),
-(6, 4, 'Great location, enjoyed the stay.', 'approved'),
-(7, 5, 'Amazing experience, would recommend!', 'approved'),
-(8, 3, 'It was fine, but expected more amenities.', 'pending'),
-(9, 5, 'Wonderful experience!', 'approved'),
-(10, 4, 'Great value for the price.', 'approved');
+(34, 5, 'Excellent stay!', 'approved'),
+(32, 3, 'Good, but could be better.', 'approved'),
+(33, 4, 'Nice place, but a bit noisy.', 'approved'),
+(33, 5, 'Perfect for our family!', 'approved'),
+(32, 2, 'Too small for the price.', 'pending'),
+(34, 4, 'Great location, enjoyed the stay.', 'approved'),
+(32, 5, 'Amazing experience, would recommend!', 'approved'),
+(33, 3, 'It was fine, but expected more amenities.', 'pending'),
+(32, 5, 'Wonderful experience!', 'approved'),
+(34, 4, 'Great value for the price.', 'approved');
 
 -- Insert sample Payments
 INSERT INTO Payment (booking_id, amount, transactionId, status)
