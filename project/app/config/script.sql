@@ -14,49 +14,23 @@ CREATE TABLE Users (
     password VARCHAR(255) NOT NULL,
     profilePicture VARCHAR(255),
     status user_status  DEFAULT 'active' ,
+    phone TEXT UNIQUE,
     role_id int,
 	FOREIGN KEY (role_id) REFERENCES Role(id) 
 );
 
 
-CREATE TABLE Admin (
-    id SERIAL PRIMARY KEY,
-   user_id INT UNIQUE,
-    FOREIGN KEY (user_id) REFERENCES "users"(id) ON DELETE CASCADE
-);
 
 
-
-CREATE TABLE "Owner" (
-    id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE,
-    FOREIGN KEY (user_id) REFERENCES "users"(id) ON DELETE CASCADE
-);
-
-CREATE TABLE "Traveler" (
-    id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE,
-	phone TEXT,
-    FOREIGN KEY (user_id) REFERENCES "users"(id) ON DELETE CASCADE
-);
-
-
-
-create type sender  as ENUM ('owner_id','traveler_id');
-create type receiver  as ENUM ('owner_id','traveler_id');
 create type message_enum as ENUM('sent', 'read', 'deleted');
 
 CREATE TABLE Messages (
     id SERIAL PRIMARY KEY,
-	owner_id int,
-	traveler_id int,
-	 FOREIGN KEY (owner_id) REFERENCES "Owner"(id) ON DELETE CASCADE,
-	 FOREIGN KEY (traveler_id) REFERENCES "Traveler"(id) ON DELETE CASCADE,
-    senderId sender NOT NULL,
-    receiverId receiver NOT NULL,
+    senderId int  NOT NULL,
+    receiverId int   NOT NULL,
     content TEXT NOT NULL,
     sentAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status message_enum DEFAULT 'sent' -- Changed status to ENUM
+    status message_enum DEFAULT 'sent'
 );
 
 CREATE TABLE Category (
@@ -68,8 +42,8 @@ create type accommodation_enum  as ENUM('available', 'booked');
 
 CREATE TABLE Accommodation (
     id SERIAL PRIMARY KEY,
-	owner_id INT ,
-	foreign key (owner_id) references "Owner"(id),
+	user_id INT ,
+	foreign key (user_id) references "Users"(id),
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     category_id INT,
@@ -94,11 +68,11 @@ CREATE TABLE Booking (
     numberOfGuests INT NOT NULL,
     totalPrice FLOAT NOT NULL,
     status booking_enum  DEFAULT 'active'
-     traveler_id INT,
-   FOREIGN KEY (traveler_id) REFERENCES "Traveler"(id)
+    user_id INT,
+   FOREIGN KEY (user_id) REFERENCES "user"(id)
 );
 
-create type review_enum  as ENUM('approved', 'pending', 'rejected');
+create type reviews_enum  as ENUM('active', 'suspend', 'deleted');
 
 CREATE TABLE Review (
     id SERIAL PRIMARY KEY,
@@ -107,7 +81,7 @@ CREATE TABLE Review (
     rating INT CHECK (rating BETWEEN 1 AND 5),
     comment TEXT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status review_enum DEFAULT 'pending' 
+    status reviews_enum DEFAULT 'active' 
 	);
 
 
