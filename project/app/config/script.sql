@@ -13,7 +13,9 @@ CREATE TABLE Users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     profilePicture VARCHAR(255),
-    status user_status  DEFAULT 'active'  
+    status user_status  DEFAULT 'active' ,
+    role_id int,
+	FOREIGN KEY (role_id) REFERENCES Role(id) 
 );
 
 
@@ -34,6 +36,7 @@ CREATE TABLE "Owner" (
 CREATE TABLE "Traveler" (
     id SERIAL PRIMARY KEY,
     user_id INT UNIQUE,
+	phone TEXT,
     FOREIGN KEY (user_id) REFERENCES "users"(id) ON DELETE CASCADE
 );
 
@@ -127,3 +130,4 @@ CREATE TABLE Promotion (
     endDate DATE NOT NULL,
     type promotion_enum  DEFAULT 'seasonal'
 );
+
