@@ -14,7 +14,7 @@ class Booking {
          $this->id = $id;
          $this->inDate = $inDate;
          $this->outDate = $outDate;
-         $this->numberOfGuests = $numberOfGuest;
+         $this->numberOfGuests = $numberOfGuests;
          $this->totalPrice = $totalPrice;
     }
 
