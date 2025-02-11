@@ -21,6 +21,7 @@ class Router {
        
         foreach (self::$routes as $route) {
             if ($route['route'] === $requestUri && $route['method'] === $requestMethod) {
+                
                 [$controller, $method] = explode('@', $route['action']);
 
                 $namespace =  "App\\controllers\\";

@@ -16,8 +16,5 @@ class Validator{
         }
         return self::$result;
     }
-
-
-
    
 }
