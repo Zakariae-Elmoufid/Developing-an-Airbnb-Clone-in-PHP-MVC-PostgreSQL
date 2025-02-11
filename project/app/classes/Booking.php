@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\classes\Booking;
+namespace App\classes;
 
 class Booking {
     

@@ -27,11 +27,11 @@ class Controller
         return Session::get('id') !== null && Session::get('role') === $role;
     }
 
-    protected function requireAuth()
-    {
-        if (!$this->isAuthenticated()) {
-            Session::setFlash('error', 'you must login.');
-            $this->redirect('/login');
-        }
-    }
+    // protected function requireAuth()
+    // {
+    //     if (!$this->isAuthenticated()) {
+    //         Session::setFlash('error', 'you must login.');
+    //         $this->redirect('/login');
+    //     }
+    // }
 }

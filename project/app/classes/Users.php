@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\classes\Booking;
+namespace App\classes;
 
 use App\config\Database;
 use PDO;
