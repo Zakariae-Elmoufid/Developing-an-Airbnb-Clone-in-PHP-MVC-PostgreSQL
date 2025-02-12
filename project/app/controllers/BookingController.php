@@ -9,15 +9,25 @@ use \Datetime;
 class BookingController extends Controller {
     
     public $role  = "Traveler";
+    public $bookingModel;
+    
+    public function __construct(){
+        $this->bookingModel = new BookingModel();
+    }
 
     public function show(){
         $this->view($this->role.'/addBooking'); 
     }
 
+
+    public function getAccommodationById(){
+         $data = $this->bookingModel->findById('accommodation', 4); 
+         $this->view($this->role.'/addBooking',$data); 
+    }
+
     public function fechCalander(){
      header('Content-Type: application/json');
-        $bookingModel = new BookingModel();
-        $reservations = $bookingModel->getReservedDates();
+        $reservations = $this->bookingModel->getReservedDates();
      
         $reservedDates = [];
 
@@ -30,8 +40,26 @@ class BookingController extends Controller {
         }
     }
 
-    echo json_encode([$reservedDates]);
+    echo json_encode($reservedDates);
     exit;
+    }
+
+    public function addBooking(){
+        header("Content-Type: application/json");
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $dateStart = $_POST['checkIn'];
+            $dateEnd  =  $_POST['checkOut'];
+            $total =  $_POST['total'];
+            
+                echo json_encode([
+                'start'=> $dateStart
+            ]);
+            exit;
+
+        }
+
+        $this->view(); 
     }
     
     

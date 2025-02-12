@@ -10,14 +10,16 @@ use PDOException;
 
 class BookingModel extends Model{
 
-    public function getBookingDates(){
-       
+    public function findAccommodationById($table,$idAccommodation){
+        $stmt = $this->query("SELECT * FROM Booking WHERE status = 'active' and id = 3");
+
     }
 
     public function getReservedDates() {
         $stmt = $this->query("SELECT checkInDate, checkOutDate FROM Booking WHERE status = 'active' and id = 3");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  
     }
+    
+    
    
 }

@@ -2,6 +2,9 @@
 
 namespace App\core;
 use App\config\Database;
+use PDO;
+use Exception;
+use PDOException;
 
 class Model {
     
