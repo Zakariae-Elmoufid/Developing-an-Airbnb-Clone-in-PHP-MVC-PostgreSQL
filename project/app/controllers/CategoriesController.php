@@ -16,13 +16,31 @@ class CategoriesController extends Controller{
     $this->view('admin/categories'); 
   }
 
-  public function addCategories(){
-    // Database::getConnection();
+  public function addCategories() {
     $data = json_decode(file_get_contents("php://input"), true);
-    $this->categorie->setTitle($data["title"]);
-    $this->categorie->addCategorie();
-    print_r(  $data["title"] ); 
-  }
+    if (isset($data["title"])) {
+        $this->categorie->setTitle($data["title"]);
+        if ($this->categorie->addCategorie()) {
+
+            print_r(json_encode([
+
+                "icon" => "success",
+                "title" => "Category added successfully"
+            ]));
+        } else {
+            print_r(json_encode([
+                "icon" => "error",
+                "title" => "Failed to add category"
+            ]));
+        }
+    } else {
+        print_r(json_encode([
+            "icon" => "error",
+            "title" => "Title is required"
+        ]));
+    }
+}
+
 
 
 

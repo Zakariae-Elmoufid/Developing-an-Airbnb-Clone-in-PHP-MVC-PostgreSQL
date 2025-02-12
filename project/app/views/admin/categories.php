@@ -25,7 +25,7 @@
         <div class="flex justify-between items-center p-6 border-b">
                     <h5 class="text-2xl font-semibold text-gray-800">Add New Categories</h5>
 
-                    <button class="text-gray-400 hover:text-gray-600 transition-colors" onclick="fermModal(modalAddCategories)">
+                    <button class="text-gray-400 hover:text-gray-600 transition-colors" onclick="fermModal(modalAddCategories,formAdd)">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
@@ -123,6 +123,7 @@
 
 
 <script src="../../../public/asset/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </body>
 </html>

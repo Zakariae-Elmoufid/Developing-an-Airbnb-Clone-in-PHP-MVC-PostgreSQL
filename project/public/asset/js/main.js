@@ -1,8 +1,10 @@
 const modalAddCategories= document.getElementById('addNewCategoriesModal')
 const formAdd = document.getElementById('addCategoriesForm')
 
-function fermModal(modal){
+function fermModal(modal,form){
     modal.classList.add('hidden');
+    form.reset();
+
 }
 function ouverModal(modal){
     modal.classList.remove('hidden');
@@ -33,15 +35,34 @@ document.getElementById("addCategoriesBtn").value = 'Please Wait ...';
         body: JSON.stringify(data), 
     });
 
-    const result = await response.text();
-     console.log(result);
-     
-    // Afficher la réponse dans l'élément 'alert'
-    // alert.innerHTML = result;
+    const result = await response.json();
+    // console.log(result);
+    let icon=result['icon'];
+    let title=result['title'];
+    // console.log(icon,title);
     
-
-
-
+    
+    fermModal(modalAddCategories,formAdd)
+    alert(icon,title)
     }
     
 })
+
+
+function alert(iconparam,titleparam){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: iconparam,
+        title: titleparam
+      });
+}
