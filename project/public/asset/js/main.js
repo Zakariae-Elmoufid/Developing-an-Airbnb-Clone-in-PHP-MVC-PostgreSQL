@@ -11,13 +11,11 @@ function ouverModal(modal){
 formAdd.addEventListener("submit",async (e)=>{
     e.preventDefault();
     const formData = new FormData(formAdd);
-    console.log(formData);
     // Créer un objet à partir de FormData
     const data = {};
     formData.forEach((value, key) => {
         data[key] = value;
     });
-    console.log(JSON.stringify(data));
     
     if (!formAdd.checkValidity()) {
         e.stopPropagation();
@@ -37,11 +35,8 @@ try {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data), // Convertir l'objet JavaScript en JSON
+        body: JSON.stringify(data), 
     });
-
-    // Affichage dans la console pour vérifier les données envoyées
-    console.log(JSON.stringify(data));
 
     // Vérification du statut de la réponse
     if (!response.ok) {
@@ -50,9 +45,10 @@ try {
 
     // Récupérer la réponse du serveur
     const result = await response.text();
-
+     console.log(result);
+     
     // Afficher la réponse dans l'élément 'alert'
-    alert.innerHTML = result;
+    // alert.innerHTML = result;
     } catch (error) {
     // En cas d'erreur, rétablir le texte du bouton et afficher l'erreur
     document.getElementById("addCategoriesBtn").value = 'Try Again';
