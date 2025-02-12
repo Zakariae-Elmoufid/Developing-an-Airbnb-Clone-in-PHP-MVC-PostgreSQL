@@ -17,9 +17,10 @@ class CategoriesController extends Controller{
   }
 
   public function addCategories(){
+    // Database::getConnection();
     $data = json_decode(file_get_contents("php://input"), true);
-    // $this->categorie->setTitle($data["titel"]);
-    // $this->categorie->addCategorie();
+    $this->categorie->setTitle($data["title"]);
+    $this->categorie->addCategorie();
     print_r(  $data["title"] ); 
   }
 
