@@ -34,4 +34,9 @@ class Controller
             $this->redirect('/login');
         }
     }
+
+    public function users($table) {
+        $data = findAll($table);
+        return $data;
+    }
 }

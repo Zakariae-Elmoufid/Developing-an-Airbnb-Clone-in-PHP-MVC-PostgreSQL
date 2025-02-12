@@ -2,19 +2,21 @@
 
 namespace App\core;
 use App\config\Database;
-
+use PDO;
+use Exception;
+use PDOException;
 class Model {
     
     protected   $conn;
 
     public function __construct(){
-        $this->$conn = Database::getConnection();
+        $this->conn = Database::getConnection();
     }
 
 
     public function query($sql, $params = [])
     {
-        $stmt = $this->$conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
         return $stmt;
     }
@@ -36,7 +38,7 @@ class Model {
         $columns = implode(',', array_keys($data));
         $placeholders = implode(',', array_fill(0, count($data), '?'));
         $stmt = $this->query("INSERT INTO $table ($columns) VALUES ($placeholders)", array_values($data));
-        return $this->$conn->lastInsertId();
+        return $this->conn->lastInsertId();
     }
 
     public function update($table, $data, $id)
