@@ -3,6 +3,7 @@
 namespace App\models;
 use App\core\Model;
 use App\config\Database;
+use PDO;
 
 class Categorie extends Model {
     private $id;
@@ -17,11 +18,19 @@ class Categorie extends Model {
 
     public function setId($id){$this->id=$id;}
     public function setTitle($title){$this->title=$title;}
+
     public function addCategorie() {
         $sql = "INSERT INTO " . $this->table . " (title) VALUES (?);";
         $stmt = $this->conect->prepare($sql); 
         $stmt->execute([$this->title]); 
         return $this->conect->lastInsertId();
+    }
+
+    public function getAllCategories(){
+        $sql="SELECT * from ". $this->table ;
+        $stmt = $this->conect->prepare($sql); 
+        $stmt->execute(); 
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
     
      

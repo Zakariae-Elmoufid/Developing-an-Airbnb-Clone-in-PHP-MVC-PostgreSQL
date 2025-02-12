@@ -72,33 +72,15 @@
                 <table class="w-full">
                     <thead class="bg-gray-50 rounded-xl">
                         <tr>
-                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Name</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Email</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Phone</th>
-                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">ID</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">titel</th>
                             <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-semibold">
-                                        JD
-                                    </div>
-                                    <div>
-                                        <div class="font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm text-gray-500">Added on Jan 10, 2024</div>
-                                    </div>
-                                </div>
-                            </td>
+                        <tr>
+                            <td class="px-6 py-4 text-gray-600">12</td>
                             <td class="px-6 py-4 text-gray-600">john@example.com</td>
-                            <td class="px-6 py-4 text-gray-600">+1 (555) 000-0000</td>
-                            <td class="px-6 py-4">
-                                <span class="px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-600">
-                                    Active
-                                </span>
-                            </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-end gap-2">
                                     <button class="text-gray-400 hover:text-blue-500 transition-colors">

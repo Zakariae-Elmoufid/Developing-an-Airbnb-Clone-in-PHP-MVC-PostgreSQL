@@ -23,7 +23,6 @@ class CategoriesController extends Controller{
         if ($this->categorie->addCategorie()) {
 
             print_r(json_encode([
-
                 "icon" => "success",
                 "title" => "Category added successfully"
             ]));
@@ -41,6 +40,9 @@ class CategoriesController extends Controller{
     }
 }
 
+public function allCategories(){
+    print_r($this->categorie->getAllCategories());
+}
 
 
 

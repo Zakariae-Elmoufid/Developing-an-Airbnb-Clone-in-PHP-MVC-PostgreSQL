@@ -36,10 +36,8 @@ document.getElementById("addCategoriesBtn").value = 'Please Wait ...';
     });
 
     const result = await response.json();
-    // console.log(result);
     let icon=result['icon'];
     let title=result['title'];
-    // console.log(icon,title);
     
     
     fermModal(modalAddCategories,formAdd)
@@ -66,3 +64,13 @@ function alert(iconparam,titleparam){
         title: titleparam
       });
 }
+
+const fetchallCategories = async ()=>{
+    const data = await fetch("allCategories",{
+        method: "GET",   
+    })
+    const response= await data.text();
+    console.log(response);
+    
+}
+fetchallCategories()
