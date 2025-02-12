@@ -77,7 +77,7 @@
                             <th class="px-6 py-4 text-right text-sm font-semibold text-gray-600">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
+                    <tbody id="tbodyCategories" class="divide-y divide-gray-100">
                         <tr>
                             <td class="px-6 py-4 text-gray-600">12</td>
                             <td class="px-6 py-4 text-gray-600">john@example.com</td>

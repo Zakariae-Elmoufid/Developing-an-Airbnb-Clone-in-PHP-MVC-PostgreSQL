@@ -41,7 +41,7 @@ class CategoriesController extends Controller{
 }
 
 public function allCategories(){
-    print_r($this->categorie->getAllCategories());
+    print_r(json_encode($this->categorie->getAllCategories()));
 }
 
 
