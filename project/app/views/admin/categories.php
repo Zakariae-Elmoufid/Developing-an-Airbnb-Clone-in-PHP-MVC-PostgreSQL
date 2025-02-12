@@ -15,6 +15,7 @@
   
     <!-- Main Content -->
     <div class="ml-64 p-8">
+        <!-- Add modal -->
     <div  id="addNewCategoriesModal" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm overflow-y-auto h-full w-full z-50" class="relative z-10" aria-labelledby="modal-title"  aria-modal="true">
   <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
 
@@ -33,6 +34,41 @@
                 </div>
                 <div class="p-6">
                     <form id="addCategoriesForm" class="space-y-6" novalidate>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Titel</label>
+                            <input type="text" name="title" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="example" required>
+                            <div class="text-red-500 text-sm mt-1 hidden">Titel is required!</div>
+                        </div>
+                        <button id="addCategoriesBtn" type="submit" class="inline-flex w-full justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">
+                            Add categories
+                        </button>
+                    </form>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal update -->
+    <div  id="updateCategoriesModal" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm overflow-y-auto h-full w-full z-50" class="relative z-10" aria-labelledby="modal-title"  aria-modal="true">
+  <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="flex justify-between items-center p-6 border-b">
+                    <h5 class="text-2xl font-semibold text-gray-800">Add New Categories</h5>
+
+                    <button class="text-gray-400 hover:text-gray-600 transition-colors" onclick="fermModal(modalUpdateCategories,formUpdate)">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <form id="updateCategoriesForm" class="space-y-6" novalidate>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Titel</label>
                             <input type="text" name="title" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="example" required>

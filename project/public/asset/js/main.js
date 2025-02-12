@@ -1,5 +1,7 @@
 const modalAddCategories= document.getElementById('addNewCategoriesModal')
+const modalUpdateCategories= document.getElementById('updateCategoriesModal')
 const formAdd = document.getElementById('addCategoriesForm')
+const formUpdate = document.getElementById('updateCategoriesForm')
 const tbody = document.getElementById('tbodyCategories')
 
 function fermModal(modal,form){
@@ -85,7 +87,7 @@ function displayCategories(array){
         <td class="px-6 py-4 text-gray-600">${element['title']}</td>
         <td class="px-6 py-4">
             <div class="flex items-center justify-end gap-2">
-                <button class="text-gray-400 hover:text-blue-500 transition-colors">
+                <button  onclick="ouverModal(modalUpdateCategories)" class="text-gray-400 hover:text-blue-500 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                     </svg>
