@@ -17,7 +17,7 @@ class Booking {
          $this->numberOfGuests = $numberOfGuest;
          $this->totalPrice = $totalPrice;
     }
-
+    
 }
 
 
