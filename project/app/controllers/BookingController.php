@@ -53,9 +53,11 @@ class BookingController extends Controller {
             $total =  $_POST['total'];
             
                 echo json_encode([
-                'start'=> $dateStart
+                'data'=> $_POST
             ]);
             exit;
+        }else{
+            echo json_encode(['error' => false]);
 
         }
 

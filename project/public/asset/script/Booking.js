@@ -13,13 +13,13 @@
     const dateCheckInField = document.querySelector("[data='check_in']");
     const dateCheckOutField = document.querySelector("[data='check_out']");
     const price = document.getElementById('price').textContent;
-    const guests
+    
     let totalPriceElement = document.getElementById('total');
     const submit = document.getElementById('submit');
     
     dateCheckOutField.addEventListener("input", calculet);
     dateCheckInField.addEventListener("input", calculet); 
-
+    
     function calculet(){
         
         let dateCheckIn = new Date(dateCheckInField.value);
@@ -34,32 +34,40 @@
     } 
 
    
-    addBooking(dateCheckIn,dateCheckOut,total);
+    return [dateCheckIn,dateCheckOut,total];
 }
 
 
- 
+function Booking(){
+    const Numberguests =  document.getElementById('guests').value;
+      const result =  calculet();
+      
+      return [result[0], result[1], result[2], Numberguests];
+    } 
+    
+    function addBooking(){
+        let result = Booking();
 
-function addBooking(dateCheckIn,dateCheckOut,total){
-
+    
  fetch("/make", {
     method: 'POST',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
-        checkIn: dateCheckIn,
-        checkOut: dateCheckOut,
-        total: total
+        checkIn: result[0],
+        checkOut: result[1],
+        guests : result[2],
+        amount: result[3]
     }).toString()
 })
 .then(response => response.json())
 .then(data => {
     if (data.success) {
-        alert(`${type} deleted successfully!`);
-        document.querySelector(`a[data-id="${id}"]`).closest('tr').remove();
+        alert(`${type}  successfully!`);
+       
     } else {
-        alert(`Error deleting ${type}: ` + data.message);
+        alert(`Error `);
     }
 })
 

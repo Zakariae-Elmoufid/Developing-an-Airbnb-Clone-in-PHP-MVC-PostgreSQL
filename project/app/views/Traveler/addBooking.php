@@ -127,7 +127,7 @@
                         <label for="guests" class="block text-sm font-medium mb-1">Guests</label>
                         <select id="guests" 
                                 data="guests"
-                                
+                                onchange="Booking()"
                                 class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-[#FF385C] focus:outline-none">
 
                             <?php for($i=1 ; $i <= $maxguests ; $i++){?>
