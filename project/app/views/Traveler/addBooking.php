@@ -1,3 +1,9 @@
+<?php
+echo "hello";
+var_dump($data);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,6 +63,15 @@
                     <span class="text-gray-500 ml-4">📍 8th District, Paris</span>
                 </div>
 
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold mb-4">Owner Information</h2>
+                    <div class="flex items-center gap-4">
+                        <!-- Image of the owner -->
+                        <img src="<?= htmlspecialchars($profilepicture)?>" alt="Owner Profile" class="w-12 h-12 rounded-full">
+                        <p class="font-semibold"><?= htmlspecialchars($username) ?></p>
+                    </div>
+                </div>
+
                 <!-- Description -->
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold mb-4">About this place</h2>
@@ -89,9 +104,10 @@
         <!-- Booking module -->
         <div class="lg:col-span-1">
             <div class="bg-white rounded-xl p-6 shadow-sm  ">
+                <div class="font-bold text-center " id="message"></div>
                 <div class="flex justify-between items-center mb-6">
                     <div>
-                        <span class="text-2xl font-bold" >€<p id="price"><?php echo htmlspecialchars($baseprice); ?></p></span>
+                        <p class="text-2xl font-bold" >€<span id="price"><?php echo htmlspecialchars($baseprice); ?></span></p>
                         <span class="text-gray-500"> / night</span>
                     </div>
                     <div class="flex items-center">

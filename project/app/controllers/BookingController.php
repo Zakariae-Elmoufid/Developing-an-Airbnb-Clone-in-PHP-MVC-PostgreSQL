@@ -21,7 +21,7 @@ class BookingController extends Controller {
 
 
     public function getAccommodationById(){
-         $data = $this->bookingModel->findById('accommodation', 4); 
+         $data = $this->bookingModel->findAccommodationById('accommodation', 4); 
          $this->view($this->role.'/addBooking',$data); 
     }
 

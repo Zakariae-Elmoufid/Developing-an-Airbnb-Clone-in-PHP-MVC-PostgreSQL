@@ -7,8 +7,10 @@ class Controller
 {
     protected function view($view, $data = [])
 
-    {
+    { 
+        
         extract($data);
+        
 
         $viewPath = __DIR__ . '/../views/' . str_replace('.', '/', $view) . '.php';
 
