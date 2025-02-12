@@ -33,22 +33,22 @@ class AuthService {
     public function login(array $credentials): bool {
         $user = $this->user->findByEmail($credentials['email']);
         
-        if (!$user || !password_verify($credentials['password'], $user['password'])) {
+        if (!$user || !password_verify($credentials['password'], $user->password)) {
             throw new \Exception('Invalid credentials');
         }
         
         $this->setUserSession($user);
         
         if (isset($credentials['remember_me'])) {
-            $this->handleRememberMe($user['id']);
+            $this->handleRememberMe($user->id);
         }
         
         return true;
     }
     
-    private function setUserSession(array $user): void {
-        Session::set('user_id', $user['id']);
-        Session::set('username', $user['username']);
+    private function setUserSession(object $user): void {
+        Session::set('user_id', $user->id);
+        Session::set('username', $user->username);
     }
     
     private function handleRememberMe(int $userId): void {
