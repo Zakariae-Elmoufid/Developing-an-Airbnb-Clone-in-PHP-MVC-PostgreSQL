@@ -3,19 +3,20 @@ namespace App\controllers;
 
 use App\core\Controller;
 use App\config\Database;
-use App\models\Categorie;
+use App\models\Accommodation;
 
 
 class AccomodationController extends Controller{
-    private $categorie;
-//    public function __construct(){
-//       $this->categorie= new Categorie();
-//    }
+    private $accommodation;
+   public function __construct(){
+      $this->accommodation= new Accommodation();
+   }
 
   public function index(){
     $this->view('admin/accommodation'); 
   }
   public function accomondationNotValide(){
-    
+    $data=$this->accommodation->getAccommodationNotValide();
+    print_r(json_encode($data));
   }
 }
