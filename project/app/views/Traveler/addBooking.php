@@ -1,6 +1,5 @@
 <?php
-echo "hello";
-var_dump($data);
+// var_dump($data);
 
 ?>
 
@@ -14,19 +13,86 @@ var_dump($data);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class=" bg-gray-50">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm py-4">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-[#FF385C]"> <?= $title?></h1>
-            <div class="flex gap-4">
-                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-full">Sign in</button>
-                <button class="px-4 py-2 bg-[#FF385C] text-white rounded-full hover:bg-[#E31C5F]">Book now</button>
+
+<nav class="bg-white shadow-md fixed w-full z-50">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+                <img src="../../public/asset/images/logo.png" alt="airbnb" class="w-20">
+            </div>
+
+            <!-- Navigation Menu - Desktop -->
+            <div class="hidden md:block">
+                <ul class="flex space-x-8">
+                    <li>
+                        <a href="#" class="text-gray-600 hover:text-[#FF385C] px-3 py-2 text-sm font-medium transition-colors">
+                            Accommodation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/myBooking" class="text-gray-600 hover:text-[#FF385C] px-3 py-2 text-sm font-medium transition-colors">
+                            My Bookings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-600 hover:text-[#FF385C] px-3 py-2 text-sm font-medium transition-colors">
+                            Profile
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- User Menu -->
+            <div class="flex items-center space-x-4">
+                <p class="hidden md:block font-medium text-gray-700">Username</p>
+                <div class="relative group">
+                    <button class="flex items-center focus:outline-none">
+                        <img class="h-8 w-8 rounded-full object-cover border-2 border-[#FF385C]" 
+                             src="https://intranet.youcode.ma/storage/users/profile/thumbnail/1130-1727859974.JPG" 
+                             alt="User profile">
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Sign out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button class="mobile-menu-button p-2 rounded-md hover:bg-gray-100 focus:outline-none">
+                    <svg class="h-6 w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </div>
-    </nav>
 
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#FF385C] hover:bg-gray-50">
+                    Accommodation
+                </a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#FF385C] hover:bg-gray-50">
+                    My Bookings
+                </a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#FF385C] hover:bg-gray-50">
+                    Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 <div class=" mx-auto p-4 ">
     <div class="grid grid-cols-4 gap-4 ">
         <?php
@@ -36,12 +102,12 @@ var_dump($data);
             foreach ($photose as $index => $photo) {
                 if ($index === 0) {
                     echo "<div class='col-span-2 row-span-2 '>";
-                    echo "<img src='" . htmlspecialchars($photo) . "' alt='Photo' class='w-full h-full  rounded-lg'>";
+                    echo "<img src='" . htmlspecialchars($photo) . "' alt='Photo' class='w-full h-100  rounded-lg'>";
                     echo "</div>";
                 }
                 elseif ($index < 5) {
                     echo "<div class='col-span-1 row-span-1  '>";
-                    echo "<img src='" . htmlspecialchars($photo) . "' alt='Photo' class= ' w-full h-full  rounded-lg'>";
+                    echo "<img src='" . htmlspecialchars($photo) . "' alt='Photo' class= ' w-full h-50  rounded-lg'>";
                     echo "</div>";
                 }
             }
@@ -60,7 +126,7 @@ var_dump($data);
                     <span class="text-[#FF385C]">⭐</span>
                     <span class="font-semibold">4.8</span>
                     <span class="text-gray-500">(324 reviews)</span>
-                    <span class="text-gray-500 ml-4">📍 8th District, Paris</span>
+                    <span class="text-gray-500 ml-4">📍<?= $address ?></span>
                 </div>
 
                 <div class="mb-6">
@@ -170,6 +236,11 @@ var_dump($data);
         </div>
     </div>
 </div>
+
+
+
+
+
     <script src="../../../public/asset/script/Booking.js"></script>
 </body>
 </html>

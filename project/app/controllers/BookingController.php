@@ -19,6 +19,11 @@ class BookingController extends Controller {
         $this->view($this->role.'/addBooking'); 
     }
 
+    public function myBooking(){
+        $data = $this->bookingModel->getMybooking('booking',2);
+        $this->view($this->role.'/myBooking',$data); 
+    }
+
 
     public function getAccommodationById(){
          $data = $this->bookingModel->findAccommodationById('accommodation', 4); 
@@ -63,6 +68,16 @@ class BookingController extends Controller {
 
         $this->view(); 
     }
-    
-    
+
+    public function insetReview(){
+        $data = $this->bookingModel->insert('review',['rating' => 5 , 'comment' => "hello everdevelloper", 'booking_id' => 1 ]); 
+    }
+
+ 
 }
+
+$model = new BookingController();
+// $model->insetReview();
+
+
+
