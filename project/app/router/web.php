@@ -10,6 +10,6 @@ Router::add('POST','/make', 'BookingController@addBooking');
 Router::add('GET','myBooking', 'BookingController@myBooking');
 Router::add('POST','/myBooking','ReviewController@insetReview');
 Router::add('GET','success','PaymentsController@successPage');
-
-
 // Router::add('GET','Booking', 'CalanderController@fechCalander');
+
+

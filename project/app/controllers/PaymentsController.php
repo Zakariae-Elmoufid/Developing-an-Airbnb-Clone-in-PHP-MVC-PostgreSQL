@@ -18,6 +18,9 @@ class PaymentsController extends Controller {
     public function payments($dateStart, $dateEnd, $total) {
     
         $checkout_session = Session::create([
+            'mode' => 'payment',
+            'success_url' => "http://localhost:8080/success",
+            'cancel_url' => "http://localhost:8080/cancel",
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'usd',
@@ -28,9 +31,7 @@ class PaymentsController extends Controller {
                 ],
                 'quantity' => 1,
             ]],
-            'mode' => 'payment',
-            'success_url' => "http://localhost:8080/success",
-            'cancel_url' => "http://localhost:8080/cancel",
+          
         ]);
         http_response_code(303);
         header("location: ". $checkout_session->url);
