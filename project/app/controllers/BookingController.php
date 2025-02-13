@@ -8,8 +8,8 @@ use \Datetime;
 
 class BookingController extends Controller {
     
-    public $role  = "Traveler";
-    public $bookingModel;
+    private $role  = "Traveler";
+    private $bookingModel;
     
     public function __construct(){
         $this->bookingModel = new BookingModel();
@@ -69,15 +69,12 @@ class BookingController extends Controller {
         $this->view(); 
     }
 
-    public function insetReview(){
-        $data = $this->bookingModel->insert('review',['rating' => 5 , 'comment' => "hello everdevelloper", 'booking_id' => 1 ]); 
-    }
+    
 
  
 }
 
-$model = new BookingController();
-// $model->insetReview();
+
 
 
 

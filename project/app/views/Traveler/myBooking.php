@@ -1,3 +1,8 @@
+<?php
+require __DIR__ . "/../../../vendor/autoload.php";
+use App\core\Session;
+Session::start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,30 +149,35 @@
                         </div>
                     <?php else: ?>
                         <!-- Review Form -->
-                        <form action="submit-review.php" method="POST" class="space-y-4">
-                            <input type="hidden" name="booking_id" value="<?= htmlspecialchars($booking['id']) ?>">
-
+                        <form action="/myBooking" method="POST" class="space-y-4">
+                            <input type="" name="booking_id" value="<?= htmlspecialchars($booking['id']) ?>">
+                             <h1><?= Session::getFlash('success')?></h1>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Rating</label>
                                 <select name="rating" 
                                         class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-[#FF385C] focus:outline-none" 
-                                        required>
+                                        >
+                                    
                                     <option value="">Select rating</option>
-                                    <option value="5">5 - Excellent</option>
-                                    <option value="4">4 - Very Good</option>
-                                    <option value="3">3 - Good</option>
-                                    <option value="2">2 - Fair</option>
-                                    <option value="1">1 - Poor</option>
+                                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                                    <option value="4">⭐⭐⭐⭐ Very Good</option>
+                                    <option value="3">⭐⭐⭐ Good</option>
+                                    <option value="2">⭐⭐ Fair</option>
+                                    <option value="1">⭐ Poor</option>
                                 </select>
+                                <small class="text-red-500"><?php echo Session::getFlash('rating') ?? '' ; ?></small>
+
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium mb-1">Your Review</label>
-                                <textarea name="review" 
+                                <textarea name="comment" 
                                           rows="3" 
                                           class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-[#FF385C] focus:outline-none"
                                           placeholder="Share your experience..." 
-                                          required></textarea>
+                                          required><?=Session::getFlash('comment_value')  ?></textarea>
+                                          <small class="text-red-500"><?php echo Session::getFlash('comment') ?? '' ; ?></small>
+         
                             </div>
 
                             <button type="submit" 

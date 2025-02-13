@@ -23,7 +23,7 @@ class Controller
 
     protected function redirect($file)
     {
-        require_once __DIR__ . '/../views/'.$file;
+        header("Location:".$file);
         exit;
     }
 
