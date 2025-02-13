@@ -4,7 +4,7 @@ const formAdd = document.getElementById('addCategoriesForm')
 const formUpdate = document.getElementById('updateCategoriesForm')
 const tbody = document.getElementById('tbodyCategories')
 const titelInput = document.getElementById('title')
-
+let id ;
 function fermModal(modal,form){
     modal.classList.add('hidden');
     form.reset();
@@ -43,9 +43,11 @@ document.getElementById("addCategoriesBtn").value = 'Please Wait ...';
     let icon=result['icon'];
     let title=result['title'];
     
-    
+
     fermModal(modalAddCategories,formAdd)
     alert(icon,title)
+    fetchallCategories()
+
     }
     
 })
@@ -74,16 +76,21 @@ const fetchallCategories = async ()=>{
         method: "GET",   
     })
     const response= await data.json();
-    console.log(response);
     
     displayCategories(response);
     
 }
 fetchallCategories()
 
+
+
+
+
 function displayCategories(array){
+    let tableRows = '';  
+
     array.forEach(element => {
-        tbody.innerHTML+=`<tr>
+        tableRows += `<tr>
         <td class="px-6 py-4 text-gray-600">${element['id']}</td>
         <td class="px-6 py-4 text-gray-600">${element['title']}</td>
         <td class="px-6 py-4">
@@ -100,16 +107,30 @@ function displayCategories(array){
                 </button>
             </div>
         </td>
-    </tr>`
-        
+    </tr>`;
     });
-   
+
+    tbody.innerHTML = tableRows;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 tbody.addEventListener("click", (e) => {
     let target = e.target.closest('.editLink');
     if (target) {
-        let id = target.getAttribute("id");
+        id = target.getAttribute("id");
         console.log(id);
         remplireFormUpdate(id);
     }
@@ -120,8 +141,46 @@ const remplireFormUpdate = async (id)=>{
         method: "GET",   
     })
     const response= await data.json();
-    console.log(response['title']);
-    
     titelInput.value=response['title']
 }
 
+formUpdate.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formUpdate);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+    data.id = id;
+
+    if (!formUpdate.checkValidity()) {
+        e.stopPropagation();
+        formUpdate.querySelectorAll(":invalid").forEach(input => {
+            input.classList.add("border-red-500");
+            const errorMessage = input.nextElementSibling;
+            if (errorMessage) errorMessage.classList.remove("hidden");
+        });
+        return; 
+    }
+
+    document.getElementById("addCategoriesBtn").value = 'Please Wait ...';
+
+    const response = await fetch('categories', {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    const icon = result['icon'];
+    const title = result['title'];
+
+    fermModal(modalUpdateCategories, formUpdate);
+    alert(icon,title);
+    fetchallCategories();
+});

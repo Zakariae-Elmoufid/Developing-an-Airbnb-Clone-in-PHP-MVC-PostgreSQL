@@ -27,7 +27,7 @@ class Categorie extends Model {
     }
 
     public function getAllCategories(){
-        $sql="SELECT * from ". $this->table ;
+        $sql = "SELECT * FROM " . $this->table . " ORDER BY id DESC";
         $stmt = $this->conect->prepare($sql); 
         $stmt->execute(); 
         return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -39,5 +39,10 @@ class Categorie extends Model {
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
     
-     
+     public function updateCategorie(){
+        $sql="UPDATE $this->table set title= ? where id=?";
+        $stmt = $this->conect->prepare($sql); 
+        $stmt->execute([$this->title,$this->id]);
+        return true ;
+     }
 }

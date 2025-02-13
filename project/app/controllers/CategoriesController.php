@@ -50,10 +50,30 @@ public function getCategorieById(){
         print_r(json_encode($this->categorie->getCategorieById()));
     }
 }
+ public function updateCategories(){
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (isset($data["title"])) {
+        $this->categorie->setTitle($data["title"]);
+        $this->categorie->setId($data["id"]);
+        if ($this->categorie->updateCategorie()) {
 
-
-
-
+            print_r(json_encode([
+                "icon" => "success",
+                "title" => "Category added successfully"
+            ]));
+        } else {
+            print_r(json_encode([
+                "icon" => "error",
+                "title" => "Failed to add category"
+            ]));
+        }
+    } else {
+        print_r(json_encode([
+            "icon" => "error",
+            "title" => "Title is required"
+        ]));
+    }
+}
 
 
 }
