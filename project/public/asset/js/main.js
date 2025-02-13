@@ -197,7 +197,7 @@ tbody.addEventListener("click", (e) => {
 
 
 const deletCategorie= async (id)=>{
-    const response = await fetch("deletCategorie",{
+    const response = await fetch("categories",{
         method: "DELETE",   
         headers: {
             'Content-Type': 'application/json',

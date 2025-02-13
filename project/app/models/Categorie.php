@@ -45,4 +45,10 @@ class Categorie extends Model {
         $stmt->execute([$this->title,$this->id]);
         return true ;
      }
+     public function deleteCategorie(){
+        $sql="DELETE from $this->table where id=? ";
+        $stmt=$this->conect->prepare($sql); 
+        $stmt->execute([$this->id]);
+        return true ;
+     }
 }
