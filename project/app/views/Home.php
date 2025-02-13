@@ -1,3 +1,8 @@
+<?php
+use App\config\Database;
+Database::getConnection();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
