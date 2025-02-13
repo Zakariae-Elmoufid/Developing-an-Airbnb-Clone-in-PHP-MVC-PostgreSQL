@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="mt-6 flex justify-center space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-gray-500 transition-colors">
+                        <a href="/google-login"  class="text-gray-400 hover:text-gray-500 transition-colors">
                             <span class="sr-only">Sign in with Google</span>
                             <i class="fab fa-google text-[#4285F4] text-3xl hover:scale-110 transition-transform"></i>
                         </a>
