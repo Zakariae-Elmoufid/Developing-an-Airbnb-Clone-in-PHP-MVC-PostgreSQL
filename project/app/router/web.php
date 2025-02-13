@@ -11,6 +11,6 @@ Router::add("GET","/getCategorieById","CategoriesController@getCategorieById");
 Router::add("POST","/categories","CategoriesController@addCategories");
 Router::add("PATCH","/categories","CategoriesController@updateCategories");
 Router::add("DELETE","/categories","CategoriesController@deleteCategorie");
-Router::add("GET","/accommodation","AdminController@accommodation");
+Router::add("GET","/accommodation","AccomodationController@index");
 Router::add("GET","/conflits","AdminController@conflits");
 Router::add("GET","/avis","AdminController@avis");

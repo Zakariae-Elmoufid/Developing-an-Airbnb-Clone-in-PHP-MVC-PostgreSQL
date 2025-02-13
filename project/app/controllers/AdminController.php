@@ -10,12 +10,7 @@ class AdminController extends Controller{
   public function index(){
     $this->view('admin/index'); 
   }
-  public function categories(){
-    $this->view('admin/categories'); 
-  }
-  public function accommodation(){
-    $this->view('admin/accommodation'); 
-  }
+ 
   public function conflits(){
     $this->view('admin/conflits'); 
   }

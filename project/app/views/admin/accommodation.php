@@ -15,10 +15,14 @@
   
     <!-- Main Content -->
     <div class="ml-64 p-8">
-
+      <section id=""class="grid grid-cols-1 ml-1.5 mt-1.5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-xl:gap-4 gap-6">
+        
+    </section>
     </div>
 
-    
+
+    <script src="../../../public/asset/js/accommodation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
 
