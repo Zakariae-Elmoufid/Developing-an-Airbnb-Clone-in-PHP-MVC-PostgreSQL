@@ -43,6 +43,13 @@ class CategoriesController extends Controller{
 public function allCategories(){
     print_r(json_encode($this->categorie->getAllCategories()));
 }
+public function getCategorieById(){
+    if(isset($_GET['id'])){
+        $id=$_GET['id'];
+        $this->categorie->setId($id);
+        print_r(json_encode($this->categorie->getCategorieById()));
+    }
+}
 
 
 

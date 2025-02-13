@@ -3,6 +3,7 @@ const modalUpdateCategories= document.getElementById('updateCategoriesModal')
 const formAdd = document.getElementById('addCategoriesForm')
 const formUpdate = document.getElementById('updateCategoriesForm')
 const tbody = document.getElementById('tbodyCategories')
+const titelInput = document.getElementById('title')
 
 function fermModal(modal,form){
     modal.classList.add('hidden');
@@ -110,15 +111,17 @@ tbody.addEventListener("click", (e) => {
     if (target) {
         let id = target.getAttribute("id");
         console.log(id);
-        // editUser(id);
+        remplireFormUpdate(id);
     }
 });
  
-const remplireFormUpdate = async (e)=>{
-    const data = await fetch("getCategorieById",{
+const remplireFormUpdate = async (id)=>{
+    const data = await fetch(`getCategorieById?id=${id}`,{
         method: "GET",   
     })
     const response= await data.json();
-    console.log(response);
+    console.log(response['title']);
+    
+    titelInput.value=response['title']
 }
 

@@ -32,6 +32,12 @@ class Categorie extends Model {
         $stmt->execute(); 
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+    public function getCategorieById(){
+        $sql="SELECT * from ". $this->table ." WHERE id=? ;" ;
+        $stmt = $this->conect->prepare($sql); 
+        $stmt->execute([$this->id]); 
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
     
      
 }
