@@ -4,13 +4,16 @@ namespace App\controllers;
 use App\core\Controller;
 use App\models\BookingModel;
 use \Datetime;
+// use App\controllers\PaymentsController;
 
 
 class BookingController extends Controller {
     
     private $role  = "Traveler";
     private $bookingModel;
-    
+    private $stripeSecretKey = 'sk_test_51Qs3ZsQVjEmWX5ct39SAQn6tgTjoapP2TwY6MN2QSV3yU0kCT5RPk7QRu6wgVXTg1rEREMu1vtcLlNS8V3oRE17800Udq1szZg';
+
+
     public function __construct(){
         $this->bookingModel = new BookingModel();
     }
@@ -49,25 +52,27 @@ class BookingController extends Controller {
     exit;
     }
 
-    public function addBooking(){
+    public function addBooking() {
         header("Content-Type: application/json");
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dateStart = $_POST['checkIn'];
-            $dateEnd  =  $_POST['checkOut'];
-            $total =  $_POST['total'];
-            
-                echo json_encode([
-                'data'=> $_POST
+            $dateEnd = $_POST['checkOut'];
+            $total = $_POST['amount'];
+            $payment = new PaymentsController();
+            $session = $payment ->payments($dateStart, $dateEnd, $total);
+
+            echo json_encode([
+                'sessionId' => $session->id
             ]);
             exit;
-        }else{
-            echo json_encode(['error' => false]);
-
+        } else {
+            echo json_encode(['error' => true, 'message' => 'Invalid Request']);
         }
 
-        $this->view(); 
     }
+
+
 
     
 

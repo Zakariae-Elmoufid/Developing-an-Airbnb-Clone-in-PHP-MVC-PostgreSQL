@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966
+class ComposerStaticInitc017861c4871ab9b338918ded76f017f
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -13,15 +13,26 @@ class ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966
     );
 
     public static $prefixLengthsPsr4 = array (
+        'a' => 
+        array (
+            'apimatic\\jsonmapper\\' => 20,
+        ),
+        'U' => 
+        array (
+            'Unirest\\' => 8,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Stripe\\' => 7,
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PhpOption\\' => 10,
+            'PaypalServerSdkLib\\' => 19,
         ),
         'G' => 
         array (
@@ -31,6 +42,11 @@ class ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966
         array (
             'Dotenv\\' => 7,
         ),
+        'C' => 
+        array (
+            'Core\\' => 5,
+            'CoreInterfaces\\' => 15,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -38,6 +54,14 @@ class ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966
     );
 
     public static $prefixDirsPsr4 = array (
+        'apimatic\\jsonmapper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apimatic/jsonmapper/src',
+        ),
+        'Unirest\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apimatic/unirest-php/src',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -50,9 +74,21 @@ class ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'PaypalServerSdkLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paypal/paypal-server-sdk/src',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -62,9 +98,27 @@ class ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apimatic/core/src',
+        ),
+        'CoreInterfaces\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apimatic/core-interfaces/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'R' => 
+        array (
+            'Rs\\Json' => 
+            array (
+                0 => __DIR__ . '/..' . '/php-jsonpointer/php-jsonpointer/src',
+            ),
         ),
     );
 
@@ -80,9 +134,10 @@ class ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd64d7d9a1f1ef9f371956c85ffb3f966::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc017861c4871ab9b338918ded76f017f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc017861c4871ab9b338918ded76f017f::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc017861c4871ab9b338918ded76f017f::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc017861c4871ab9b338918ded76f017f::$classMap;
 
         }, null, ClassLoader::class);
     }

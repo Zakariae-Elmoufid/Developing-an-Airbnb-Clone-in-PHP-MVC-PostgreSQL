@@ -6,4 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Rs\\Json' => array($vendorDir . '/php-jsonpointer/php-jsonpointer/src'),
 );

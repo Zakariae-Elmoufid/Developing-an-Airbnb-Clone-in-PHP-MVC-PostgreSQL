@@ -45,7 +45,6 @@ class ReviewController extends Controller {
             header("Location: myBooking");
           exit;
         }
-        // $this->view($this->role.'/myBooking'); 
 
 
     }
