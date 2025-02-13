@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\classes;
 
 use App\config\Database;
@@ -13,13 +11,13 @@ class Users {
         $this->db = Database::getConnection();
     }
     
-    public function create($username, $email, $phone, $password) {
+    public function create($username, $email, $phone, $password, $role_id = 3) { // Default to Traveler (assuming 3 is Traveler)
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
-        $sql = "INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, email, phone, password, role_id) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         
-        return $stmt->execute([$username, $email, $phone, $hashedPassword]);
+        return $stmt->execute([$username, $email, $phone, $hashedPassword, $role_id]);
     }
     
     public function findByEmail($email) {
@@ -37,4 +35,20 @@ class Users {
         
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+
+    // Add method to get available roles
+    public function getRoles() {
+        $sql = "SELECT * FROM role";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // Add method to update user role
+    public function updateRole($userId, $roleId) {
+        $sql = "UPDATE users SET role_id = ? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$roleId, $userId]);
+    }
+    
 }

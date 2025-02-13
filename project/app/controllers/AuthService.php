@@ -1,59 +1,92 @@
 <?php
-
 namespace App\controllers;
 
+use App\config\Google;
 use App\classes\Users;
 use App\core\Session;
+use Exception;
+use Google\Service\Oauth2;
 
-class AuthService {
-    private $user;
-    
-    public function __construct(Users $user) {
-        $this->user = $user;
+class AuthService
+{
+    private $userModel;
+
+    public function __construct(Users $userModel)
+    {
+        $this->userModel = $userModel;
     }
-    
-    public function register(array $data): bool {
-        // Check if email or username already exists
-        if ($this->user->findByEmail($data['email'])) {
-            throw new \Exception('Email already registered');
+
+    public function getAuthUrl(): string
+    {
+        try {
+            $client = Google::getClient();
+            return $client->createAuthUrl();
+        } catch (Exception $e) {
+            error_log("Failed to create auth URL: " . $e->getMessage());
+            throw new Exception("Authentication system temporarily unavailable");
         }
-        
-        if ($this->user->findByUsername($data['username'])) {
-            throw new \Exception('Username already taken');
-        }
-        
-        return $this->user->create(
-            $data['username'],
-            $data['email'],
-            $data['phone'],
-            $data['password']
-        );
     }
-    
-    public function login(array $credentials): bool {
-        $user = $this->user->findByEmail($credentials['email']);
-        
-        if (!$user || !password_verify($credentials['password'], $user->password)) {
-            throw new \Exception('Invalid credentials');
+
+    public function handleCallback(string $code): object
+{
+    try {
+        $client = Google::getClient();
+        $token = $client->fetchAccessTokenWithAuthCode($code);
+
+        if (isset($token['error'])) {
+            throw new Exception($token['error_description'] ?? 'Failed to get access token');
         }
+
+        $client->setAccessToken($token);
         
-        $this->setUserSession($user);
-        
-        if (isset($credentials['remember_me'])) {
-            $this->handleRememberMe($user->id);
+        // Get user info from Google
+        $google_service = new Oauth2($client);
+        $google_user = $google_service->userinfo->get();
+
+        // Find or create user
+        $result = $this->findOrCreateUser($google_user);
+
+        return (object)[
+            'success' => true,
+            'user' => $result
+        ];
+
+    } catch (Exception $e) {
+        error_log("Google callback error: " . $e->getMessage());
+        return (object)[
+            'success' => false,
+            'error' => $e->getMessage()
+        ];
+    }
+}
+
+    private function findOrCreateUser($google_user): object|array
+    {
+        try {
+            // Check if user exists by email
+            $user = $this->userModel->findByEmail($google_user->email);
+
+            if (!$user) {
+                // Store temporary user data in session
+                $tempUser = [
+                    'username' => $google_user->name ?? explode('@', $google_user->email)[0],
+                    'email' => $google_user->email,
+                    'password' => bin2hex(random_bytes(16))
+                ];
+                
+                Session::set('temp_user', $tempUser);
+                
+                return [
+                    'needsRole' => true,
+                    'redirectTo' => '/select-role'
+                ];
+            }
+
+            return $user;
+
+        } catch (Exception $e) {
+            error_log("User creation/fetch error: " . $e->getMessage());
+            throw new Exception("Failed to process user data");
         }
-        
-        return true;
-    }
-    
-    private function setUserSession(object $user): void {
-        Session::set('user_id', $user->id);
-        Session::set('username', $user->username);
-    }
-    
-    private function handleRememberMe(int $userId): void {
-        $token = bin2hex(random_bytes(32));
-        setcookie('remember_token', $token, time() + (86400 * 30), '/');
-        // Store token in database
     }
 }

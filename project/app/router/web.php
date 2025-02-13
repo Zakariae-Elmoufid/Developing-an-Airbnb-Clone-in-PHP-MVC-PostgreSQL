@@ -14,5 +14,10 @@ Router::add("GET","/google-login","AuthController@googleLoginView");
 Router::add("GET","/google-callback","AuthController@googleCallback");
 
 
+Router::add("GET","/select_role","AuthController@googleCallback");
+
+Router::add("GET", "/select-role", "AuthController@selectRoleView");
+Router::add("POST", "/select-role", "AuthController@selectRole");
+
 
 

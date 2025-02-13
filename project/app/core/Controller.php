@@ -5,11 +5,13 @@ namespace App\core;
 
 class Controller
 {
-    protected function view($view)
+    protected function view($view, $data = [])
     {
         $viewPath = __DIR__ . '/../views/' . str_replace('.', '/', $view) . '.php';
-
+    
         if (file_exists($viewPath)) {
+            // Extract data to make variables available to view
+            extract($data);
             require_once $viewPath;
         } else {
             die("View '$view' not found!");
