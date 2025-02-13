@@ -75,5 +75,28 @@ public function getCategorieById(){
     }
 }
 
+public function deleteCategorie(){
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (isset($data["id"])) {
+        $this->categorie->setId($data["id"]);
+        if ($this->categorie->deleteCategorie()) {
+
+            print_r(json_encode([
+                "icon" => "success",
+                "title" => "Category added successfully"
+            ]));
+        } else {
+            print_r(json_encode([
+                "icon" => "error",
+                "title" => "Failed to add category"
+            ]));
+        }
+    } else {
+        print_r(json_encode([
+            "icon" => "error",
+            "title" => "Title is required"
+        ]));
+    }
+}
 
 }
