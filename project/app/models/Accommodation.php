@@ -12,7 +12,7 @@ class Accommodation extends Model {
             $this->conect= Database::getConnection();
     }
    public function getAccommodationNotValide(){
-    $sql="SELECT SELECT accommodation.address,accommodation.baseprice,accommodation.description,accommodation.id,accommodation.maxguests,accommodation.photos,users.username,category.title
+    $sql="SELECT accommodation.address,accommodation.baseprice,accommodation.description,accommodation.id,accommodation.maxguests,accommodation.baseprice,array_to_json(accommodation.photos),users.username,users.profilepicture,category.title
            FROM accommodation
             JOIN users ON users.id = accommodation.user_id
            JOIN category ON category.id = accommodation.category_id
