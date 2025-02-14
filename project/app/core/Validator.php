@@ -17,7 +17,27 @@ class Validator{
         return self::$result;
     }
 
-
-
+    static function comment($comment){
+        if(!preg_match('/^[\s\S]{50,500}$/', $comment)) {
+            self::$result=false;
+        }
+        else{
+            self::$result=true;
+        }
+        return self::$result;
+    }
+    
+    
+    static function review($review){
+        if(!preg_match('/^[1-5]$/', $review)) {
+            self::$result=false;
+        }
+        else{
+            self::$result=true;
+        }
+        return self::$result;
+    }
+    
+    
    
 }

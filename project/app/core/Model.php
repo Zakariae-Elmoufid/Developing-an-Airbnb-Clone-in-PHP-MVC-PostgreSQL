@@ -7,7 +7,7 @@ use Exception;
 use PDOException;
 class Model {
     
-    protected   $conn;
+    protected $conn;
 
     public function __construct(){
         $this->conn = Database::getConnection();
@@ -39,17 +39,7 @@ class Model {
         $columns = implode(',', array_keys($data));
 
         $placeholders = implode(',', array_fill(0, count($data), '?'));
-        // print_r($columns);
-        // print_r("---------------------");
-        // print_r($placeholders);
-        // print_r("---------------------");
-
-        try {
-            $stmt = $this->query("INSERT INTO $table ($columns) VALUES ($placeholders)", array_values($data));
-        } catch (\PDOException $th) {
-           var_dump($th->getMessage());
-           exit();
-        }
+        $stmt = $this->query("INSERT INTO $table ($columns) VALUES ($placeholders)", array_values($data));
         return $this->conn->lastInsertId();
     }
 
