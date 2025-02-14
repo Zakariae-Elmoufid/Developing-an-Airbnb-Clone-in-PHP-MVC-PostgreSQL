@@ -5,110 +5,31 @@ const accomondationNotValide= async ()=>{
           method: "GET",
         });
         const response = await data.json();
-        response.forEach(element => {
-            initSwiper(JSON.parse(response[6].array_to_json))
-        });
-        
-        
         displayAnonnces(response);
 }
 accomondationNotValide();
 
-let currentSlide = 0;
-let images = [];
 
-function initSwiper(imageUrls) {
-    images = imageUrls;
-    const swiper = document.getElementById('imageSwiper');
-    const dotsContainer = document.getElementById('swiperDots');
-    
-    // Ajouter les images
-    swiper.innerHTML = '';
-    imageUrls.forEach((url, index) => {
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = `Image ${index + 1}`;
-        img.className = 'w-full h-full object-cover flex-shrink-0';
-        swiper.appendChild(img);
-        
-        // Ajouter les points
-        const dot = document.createElement('div');
-        dot.className = `h-1.5 w-1.5 rounded-full transition-colors duration-300 ${index === 0 ? 'bg-white' : 'bg-white/50'}`;
-        dot.onclick = () => goToSlide(index);
-        dotsContainer.appendChild(dot);
-    });
-
-    updateSlide();
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    updateSlide();
-}
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % images.length;
-    updateSlide();
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + images.length) % images.length;
-    updateSlide();
-}
-
-function updateSlide() {
-    const swiper = document.getElementById('imageSwiper');
-    const dots = document.getElementById('swiperDots').children;
-    
-    swiper.style.transform = `translateX(-${currentSlide * 100}%)`;
-    
-    Array.from(dots).forEach((dot, index) => {
-        dot.className = `h-1.5 w-1.5 rounded-full transition-colors duration-300 ${
-            index === currentSlide ? 'bg-white' : 'bg-white/50'
-        }`;
-    });
-}
-
-const publicAccommodation= async (id)=> {
-    console.log(id);
-    const data = await fetch("accommodation", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(id),
-      });
-      const response = await data.json();
-      console.log(response);
-      accomondationNotValide();
-      
-}
 
 function displayAnonnces(array){
     let tableRows = "";
 
     array.forEach((element) => {
+      let images = JSON.parse(element["array_to_json"])
+      
       tableRows += `<div class="max-w-sm rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-white">
   <!-- Image Swiper Container -->
   <div class="relative h-48 group">
     <div class="flex w-full h-full overflow-hidden">
       <div id="imageSwiper" class="flex transition-transform duration-300 h-full w-full">
         <!-- Les images seront ajoutées ici -->
+          <img src="${images[0]}" class="w-full h-full object-cover flex-shrink-0" alt="${images[0]}">
+       
+
+        
+
       </div>
     </div>
-
-    <!-- Boutons de navigation -->
-    <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-    <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-
     <!-- Indicateur de position -->
     <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
       <div id="swiperDots" class="flex space-x-1">
@@ -173,6 +94,6 @@ function displayAnonnces(array){
 </div>
 `;
     });
-  
+
     sectionCard.innerHTML = tableRows;
 }

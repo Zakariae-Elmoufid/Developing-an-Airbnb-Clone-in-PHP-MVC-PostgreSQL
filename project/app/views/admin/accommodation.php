@@ -115,3 +115,7 @@
 </body>
 </html>
 
+<!-- img.alt = `Image ${index + 1,url}`;
+        img.className = 'w-full h-full object-cover flex-shrink-0';
+        swiper.appendChild(img);
+        console.log(swiper); -->
