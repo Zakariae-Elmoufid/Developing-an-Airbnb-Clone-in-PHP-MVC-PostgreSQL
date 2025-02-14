@@ -35,15 +35,8 @@ class Model {
 
     public function insert($table, $data)
     {
-
         $columns = implode(',', array_keys($data));
-
         $placeholders = implode(',', array_fill(0, count($data), '?'));
-        // print_r($columns);
-        // print_r("---------------------");
-        // print_r($placeholders);
-        // print_r("---------------------");
-
         try {
             $stmt = $this->query("INSERT INTO $table ($columns) VALUES ($placeholders)", array_values($data));
         } catch (\PDOException $th) {
