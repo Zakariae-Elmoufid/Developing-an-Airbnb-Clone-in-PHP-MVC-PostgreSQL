@@ -12,6 +12,7 @@ class Accommodation {
     private $photos;
     private $status;
     private $isvalidated;
+    //ytguijokphjkl 
     public function __construct($userId, $title, $description, $categoryId, $address, $baseprice, $maxguests, $photos) {
         $this->userId = $userId;
         $this->title = $title;
