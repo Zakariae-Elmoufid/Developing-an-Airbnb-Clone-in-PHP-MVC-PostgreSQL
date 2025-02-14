@@ -8,6 +8,9 @@ use Exception;
 use PDOException;
 use App\models\BookingModel;
 use App\classes\Booking;
+use App\classes\Accommodation;
+use App\classes\User;
+use App\classes\Role;
 
 class BookingModel extends Model{
 
@@ -15,14 +18,22 @@ class BookingModel extends Model{
         $stmt = $this->query("SELECT * FROM $table
         INNER JOIN users ON accommodation.user_id = users.id
         WHERE accommodation.isvalidated = 'true' and accommodation.id = ?",[$idAccommodation]);
-        // $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        // return new Booking($$data [datecheckin],$outDate,$status,$id=null, $numberOfGuests=null,$totalPrice=null)
-        return $stmt->fetch(PDO::FETCH_ASSOC);  
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $accommodation =   new Accommodation($data["user_id"], $data["title"], $data["description"], $data["category_id"], $data['address'], $data["baseprice"], $data["maxguests"], $data["photos"]);
+        $role = new Role($data["role_id"]);
+        $owner = new User($data["user_id"],$data["username"],$data['password'], $data['email'],$data["profilepicture"],$data["status"], $data['phone'], $role);
+  
+        return [
+            'accommodation' =>  $accommodation->toArray(),
+            'owner' => $owner->toArray()
+        ];
+        
     }
 
     public function getReservedDates() {
         $stmt = $this->query("SELECT checkInDate, checkOutDate FROM Booking WHERE status = 'active' and id = 3");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
     }
 
     public function getMybooking($table,$id){

@@ -1,5 +1,8 @@
 <?php
-// var_dump($data);
+// echo '<pre>';
+// print_r($data);
+// echo '</pre>';
+
 
 ?>
 
@@ -96,7 +99,7 @@
 <div class=" mx-auto p-4 ">
     <div class="grid grid-cols-4 gap-4 ">
         <?php
-        $photos = trim($photos, '{}');
+        $photos = trim( $data['accommodation']['photos'], '{}');
         $photose = explode(',', $photos);
 
             foreach ($photose as $index => $photo) {
@@ -126,15 +129,15 @@
                     <span class="text-[#FF385C]">⭐</span>
                     <span class="font-semibold">4.8</span>
                     <span class="text-gray-500">(324 reviews)</span>
-                    <span class="text-gray-500 ml-4">📍<?= $address ?></span>
+                    <span class="text-gray-500 ml-4">📍<?=  $data['accommodation']['address']?></span>
                 </div>
 
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold mb-4">Owner Information</h2>
                     <div class="flex items-center gap-4">
                         <!-- Image of the owner -->
-                        <img src="<?= htmlspecialchars($profilepicture)?>" alt="Owner Profile" class="w-12 h-12 rounded-full">
-                        <p class="font-semibold"><?= htmlspecialchars($username) ?></p>
+                        <img src="<?= htmlspecialchars( $data['owner']['profile_picture'])?>" alt="Owner Profile" class="w-12 h-12 rounded-full">
+                        <p class="font-semibold"><?= htmlspecialchars( $data['owner']['username']) ?></p>
                     </div>
                 </div>
 
@@ -142,7 +145,7 @@
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold mb-4">About this place</h2>
                     <p class="text-gray-600">
-                    <?php echo htmlspecialchars($description); ?>
+                    <?php echo htmlspecialchars( $data['accommodation']['description']); ?>
                     </p>
                 </div>
 
@@ -173,7 +176,7 @@
                 <div class="font-bold text-center " id="message"></div>
                 <div class="flex justify-between items-center mb-6">
                     <div>
-                        <p class="text-2xl font-bold" >€<span id="price"><?php echo htmlspecialchars($baseprice); ?></span></p>
+                        <p class="text-2xl font-bold" >€<span id="price"><?php echo htmlspecialchars( $data['accommodation']['basePrice']); ?></span></p>
                         <span class="text-gray-500"> / night</span>
                     </div>
                     <div class="flex items-center">
@@ -212,7 +215,7 @@
                                 onchange="Booking()"
                                 class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-[#FF385C] focus:outline-none">
 
-                            <?php for($i=1 ; $i <= $maxguests ; $i++){?>
+                            <?php for($i=1 ; $i <=  $data['accommodation']['maxGuests'] ; $i++){?>
                                 <option value="<?= $i ?>"><?=$i?>Ttaveler</option>
                            <?php }?>    
                           
@@ -220,7 +223,7 @@
                     </div>
 
                     <div>
-                    <p class="text-2xl font-bold" >Total:<span id="total"><?php echo htmlspecialchars($baseprice); ?></span> €</p>
+                    <p class="text-2xl font-bold" >Total:<span id="total"><?php echo htmlspecialchars( $data['accommodation']['basePrice']); ?></span> €</p>
                     </div>
 
                     <button  id="submit" onclick="addBooking()" type="button"

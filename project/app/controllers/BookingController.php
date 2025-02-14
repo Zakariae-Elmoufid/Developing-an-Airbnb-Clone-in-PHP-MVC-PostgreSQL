@@ -5,6 +5,8 @@ use App\core\Controller;
 use App\models\BookingModel;
 use \Datetime;
 use App\classes\Booking;
+use App\classes\Accommodation;
+use App\classes\user;
 
 class BookingController extends Controller {
     

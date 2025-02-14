@@ -5,12 +5,14 @@ use App\config\Database;
 use PDO;
 
 class Users {
+
     private $db;
     
     public function __construct() {
         $this->db = Database::getConnection();
     }
     
+
     public function create($username, $email, $phone, $password, $role_id = 3) { // Default to Traveler (assuming 3 is Traveler)
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
@@ -50,5 +52,8 @@ class Users {
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$roleId, $userId]);
     }
+
+
+    
     
 }

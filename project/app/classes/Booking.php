@@ -19,6 +19,19 @@ class Booking {
          $this->totalPrice = $totalPrice;
          $this->status = $status;
     }
+
+
+    public function toArray() {
+        return [
+            'id' => $this->id,
+            'in_date' => $this->inDate,
+            'out_date' => $this->outDate,
+            'number_of_guests' => $this->numberOfGuests,
+            'total_price' => $this->totalPrice,
+            'status' => $this->status
+        ];
+    }
+    
     
 }
 

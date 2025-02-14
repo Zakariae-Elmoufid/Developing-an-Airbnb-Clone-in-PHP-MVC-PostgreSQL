@@ -295,7 +295,7 @@ public function register()
             
             if( Session::get('user')->role_id == 3)
         {
-            header('Location: /accommodation');
+            header('Location: /Accommodation');
             exit;
         }
         elseif( Session::get('user')->role_id == 1)
@@ -305,7 +305,7 @@ public function register()
         }
         elseif( Session::get('user')->role_id == 2)
         {
-
+            header('Location: /dashboard');
             exit;
         }
             
