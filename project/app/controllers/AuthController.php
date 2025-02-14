@@ -288,7 +288,7 @@ public function register()
                 header('Location: /login');
                 exit;
             }
-            
+            //testing
             // Set session
             Session::set('user', $user);
             Session::set('authenticated', true);
