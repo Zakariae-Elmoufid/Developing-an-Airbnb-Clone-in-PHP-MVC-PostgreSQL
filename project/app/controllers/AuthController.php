@@ -44,109 +44,89 @@ class AuthController extends Controller
     }
 
     public function selectRole() 
-    {
-        try {
-            error_log('SelectRole method called');
-            
-            // 1. Check temp_user with more detailed logging
-            $tempUser = Session::get('temp_user');
-            error_log('Temp user data: ' . print_r($tempUser, true));
-            
-            if (!$tempUser) {
-                error_log('No temp_user found in session');
-                throw new Exception('Session expired. Please try again.');
-            }
-    
-            // 2. Validate POST data
-            if (!isset($_POST['role_id'])) {
-                error_log('No role_id in POST data');
-                throw new Exception('Please select a role');
-            }
-    
-            $roleId = $_POST['role_id'];
-            error_log('Selected role_id: ' . $roleId);
-    
-            // 3. Validate role_id is valid (assuming roles are 2 for Owner and 3 for Traveler)
-            if (!in_array($roleId, [2, 3])) {
-                error_log('Invalid role_id selected: ' . $roleId);
-                throw new Exception('Invalid role selected');
-            }
-    
-            // 4. Check all required user data
-            $requiredFields = ['username', 'email', 'password'];
-            foreach ($requiredFields as $field) {
-                if (!isset($tempUser[$field]) || empty($tempUser[$field])) {
-                    error_log("Missing required field: {$field}");
-                    throw new Exception('Invalid user data: missing ' . $field);
-                }
-            }
-    
-            // 5. Create user with additional logging
-            error_log('Creating user with data: ' . print_r([
-                'username' => $tempUser['username'],
-                'email' => $tempUser['email'],
-                'role_id' => $roleId
-            ], true));
-            
-            $success = $this->userModel->create(
-                $tempUser['username'],
-                $tempUser['email'],
-                null, // phone is optional for Google registration
-                $tempUser['password'],
-                $roleId
-            );
-    
-            if (!$success) {
-                error_log('User creation failed in database');
-                throw new Exception('Failed to create user account');
-            }
-            
-            // 6. Get created user
-            $user = $this->userModel->findByEmail($tempUser['email']);
-            if (!$user) {
-                error_log('User not found after creation');
-                throw new Exception('User creation verification failed');
-            }
-            
-            // 7. Set session and clean up
-            Session::set('user', $user);
-            Session::set('authenticated', true);
-            Session::set('success', 'Registration successful!');
-            
-            // Clear temporary data
-            Session::set('temp_user', null);
-            Session::set('auth_mode', null);
-    
-            error_log('Registration successful, redirecting to dashboard');
-            header('Location: /dashboard');
-            exit;
-    
-        } catch (Exception $e) {
-            error_log('Error in selectRole: ' . $e->getMessage());
-            error_log('Stack trace: ' . $e->getTraceAsString());
-            Session::set('error', $e->getMessage());
-            header('Location: /select-role');
-            exit;
-        }
-    }
-
-public function googleLoginView($mode = 'login') 
 {
-    // If the route is /google-register, force registration mode
-    if ($_SERVER['REQUEST_URI'] === '/google-register') {
-        $mode = 'register';
-    }
-    
     try {
-        Session::set('auth_mode', $mode);
-        $authUrl = $this->googleAuthService->getAuthUrl();
-        header('Location: ' . $authUrl);
-        exit();
+        error_log('SelectRole method called');
+        
+        // 1. Check temp_user with more detailed logging
+        $tempUser = Session::get('temp_user');
+        error_log('Temp user data: ' . print_r($tempUser, true));
+        
+        if (!$tempUser) {
+            error_log('No temp_user found in session');
+            throw new Exception('Session expired. Please try again.');
+        }
+
+        // 2. Validate POST data
+        if (!isset($_POST['role_id'])) {
+            error_log('No role_id in POST data');
+            throw new Exception('Please select a role');
+        }
+
+        $roleId = $_POST['role_id'];
+        error_log('Selected role_id: ' . $roleId);
+
+        // 3. Validate role_id is valid (assuming roles are 2 for Owner and 3 for Traveler)
+        if (!in_array($roleId, [2, 3])) {
+            error_log('Invalid role_id selected: ' . $roleId);
+            throw new Exception('Invalid role selected');
+        }
+
+        // 4. Check required user data
+        $requiredFields = ['username', 'email', 'password'];
+        foreach ($requiredFields as $field) {
+            if (!isset($tempUser[$field]) || empty($tempUser[$field])) {
+                error_log("Missing required field: {$field}");
+                throw new Exception('Invalid user data: missing ' . $field);
+            }
+        }
+
+        // 5. Create user with additional logging
+        error_log('Creating user with data: ' . print_r([
+            'username' => $tempUser['username'],
+            'email' => $tempUser['email'],
+            'role_id' => $roleId
+        ], true));
+        
+        $success = $this->userModel->create(
+            $tempUser['username'],
+            $tempUser['email'],
+            $tempUser['phone'] ?? null, // Handle phone from both registration methods
+            $tempUser['password'],
+            $roleId
+        );
+
+        if (!$success) {
+            error_log('User creation failed in database');
+            throw new Exception('Failed to create user account');
+        }
+        
+        // 6. Get created user
+        $user = $this->userModel->findByEmail($tempUser['email']);
+        if (!$user) {
+            error_log('User not found after creation');
+            throw new Exception('User creation verification failed');
+        }
+        
+        // 7. Set session and clean up
+        Session::set('user', $user);
+        Session::set('authenticated', true);
+        Session::set('success', 'Registration successful!');
+        
+        // Clear temporary data
+        Session::set('temp_user', null);
+        Session::set('auth_mode', null);
+
+        error_log('Registration successful, redirecting to dashboard');
+        header('Location: /dashboard');
+        exit;
+
     } catch (Exception $e) {
-        error_log('Google Login Error: ' . $e->getMessage());
-        Session::set('error', 'Google authentication is temporarily unavailable');
-        header('Location: /login');
-        exit();
+        error_log('Error in selectRole: ' . $e->getMessage());
+        error_log('Stack trace: ' . $e->getTraceAsString());
+        Session::set('error', $e->getMessage());
+        header('Location: /select-role');
+        exit;
     }
 }
 
@@ -198,58 +178,50 @@ public function googleCallback()
     }
 }
     
-    public function register() 
-    {
-        try {
-            $request = new RegisterRequest($_POST);
-            
-            if (!$request->validate()) {
-                Session::set('error', $request->getErrors());
-                header('Location: /register');
-                exit;
-            }
-            
-            // Check if email already exists
-            if ($this->userModel->findByEmail($_POST['email'])) {
-                Session::set('error', 'Email already exists');
-                header('Location: /register');
-                exit;
-            }
-            
-            // Check if username already exists
-            if ($this->userModel->findByUsername($_POST['username'])) {
-                Session::set('error', 'Username already exists');
-                header('Location: /register');
-                exit;
-            }
-            
-            // Get role_id from POST data
-            $roleId = $_POST['role_id'] ?? 3; // Default to Traveler if not specified
-            
-            // Create user with role
-            $success = $this->userModel->create(
-                $_POST['username'],
-                $_POST['email'],
-                $_POST['phone'],
-                $_POST['password'],
-                $roleId
-            );
-            
-            if (!$success) {
-                throw new Exception('Failed to create account');
-            }
-            
-            Session::set('success', 'Registration successful! Please login.');
-            header('Location: /login');
-            exit;
-            
-        } catch (Exception $e) {
-            error_log('Registration Error: ' . $e->getMessage());
-            Session::set('error', $e->getMessage());
+public function register() 
+{
+    try {
+        $request = new RegisterRequest($_POST);
+        
+        if (!$request->validate()) {
+            Session::set('error', $request->getErrors());
             header('Location: /register');
             exit;
         }
+        
+        // Check if email already exists
+        if ($this->userModel->findByEmail($_POST['email'])) {
+            Session::set('error', 'Email already exists');
+            header('Location: /register');
+            exit;
+        }
+        
+        // Check if username already exists
+        if ($this->userModel->findByUsername($_POST['username'])) {
+            Session::set('error', 'Username already exists');
+            header('Location: /register');
+            exit;
+        }
+        
+        // Store user data in session (similar to Google registration)
+        Session::set('temp_user', [
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'phone' => $_POST['phone'],
+            'password' => $_POST['password']
+        ]);
+        
+        // Redirect to role selection
+        header('Location: /select-role');
+        exit;
+        
+    } catch (Exception $e) {
+        error_log('Registration Error: ' . $e->getMessage());
+        Session::set('error', $e->getMessage());
+        header('Location: /register');
+        exit;
     }
+}
     
     public function login() 
     {
