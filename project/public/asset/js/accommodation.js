@@ -9,7 +9,19 @@ const accomondationNotValide= async ()=>{
 }
 accomondationNotValide();
 
-
+const publicAccommodation= async (id)=> {
+  console.log(id);
+  const data = await fetch("accommodation", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    });
+    const response = await data.json();
+    accomondationNotValide();
+    
+}
 
 function displayAnonnces(array){
     let tableRows = "";
