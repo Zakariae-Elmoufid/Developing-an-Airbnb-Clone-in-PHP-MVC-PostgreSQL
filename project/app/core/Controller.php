@@ -13,7 +13,7 @@ class Controller
         
 
         $viewPath = __DIR__ . '/../views/' . str_replace('.', '/', $view) . '.php';
-
+    
         if (file_exists($viewPath)) {
             require_once $viewPath;
         } else {
@@ -32,11 +32,11 @@ class Controller
         return Session::get('id') !== null && Session::get('role') === $role;
     }
 
-    protected function requireAuth()
-    {
-        if (!$this->isAuthenticated()) {
-            Session::setFlash('error', 'you must login.');
-            $this->redirect('/login');
-        }
-    }
+    // protected function requireAuth()
+    // {
+    //     if (!$this->isAuthenticated()) {
+    //         Session::setFlash('error', 'you must login.');
+    //         $this->redirect('/login');
+    //     }
+    // }
 }

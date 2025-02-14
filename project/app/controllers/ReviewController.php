@@ -2,7 +2,7 @@
 
 namespace App\controllers;
 use App\core\Controller;
-use App\models\BookingModel;
+use App\models\ReviewModel;
 use App\core\Validator;
 use App\core\Session;
 Session::start();
@@ -11,15 +11,12 @@ Session::start();
 
 class ReviewController extends Controller {
     private $role  = "Traveler";
-    private $bookingModel;
+    private $ReviewModel;
     
     public function __construct(){
-        $this->bookingModel = new BookingModel();
+        $this->ReviewModel = new ReviewgModel();
     }
 
-    // public function makeReview(){
-    //     $this->insetReview();
-    // }
 
     public function insetReview(){
        
@@ -37,7 +34,7 @@ class ReviewController extends Controller {
 
          
        if (Validator::comment($comment) && Validator::review($rating)) {
-          $this->bookingModel->insert('review',['rating' => $rating , 'comment' => $comment , 'booking_id' => $booking_id ]); 
+          $this->ReviewModel->insert('review',['rating' => $rating , 'comment' => $comment , 'booking_id' => $booking_id ]); 
           Session::setFlash('success', "Review submitted successfully.");
           header("Location: myBooking");
           exit;

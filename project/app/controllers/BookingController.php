@@ -4,14 +4,12 @@ namespace App\controllers;
 use App\core\Controller;
 use App\models\BookingModel;
 use \Datetime;
-// use App\controllers\PaymentsController;
-
+use App\classes\Booking;
 
 class BookingController extends Controller {
     
     private $role  = "Traveler";
     private $bookingModel;
-    private $stripeSecretKey = 'sk_test_51Qs3ZsQVjEmWX5ct39SAQn6tgTjoapP2TwY6MN2QSV3yU0kCT5RPk7QRu6wgVXTg1rEREMu1vtcLlNS8V3oRE17800Udq1szZg';
 
 
     public function __construct(){

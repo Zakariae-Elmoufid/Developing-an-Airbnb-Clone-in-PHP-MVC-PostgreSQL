@@ -1,13 +1,13 @@
 <?php 
 
 namespace App\models;
-require __DIR__ . "/../../vendor/autoload.php";
-// use App\classes\Booking;
+// require __DIR__ . "/../../vendor/autoload.php";
 use App\core\Model;
 use PDO;
 use Exception;
 use PDOException;
 use App\models\BookingModel;
+use App\classes\Booking;
 
 class BookingModel extends Model{
 
@@ -15,7 +15,9 @@ class BookingModel extends Model{
         $stmt = $this->query("SELECT * FROM $table
         INNER JOIN users ON accommodation.user_id = users.id
         WHERE accommodation.isvalidated = 'true' and accommodation.id = ?",[$idAccommodation]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);  
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        // return new Booking($$data [datecheckin],$outDate,$status,$id=null, $numberOfGuests=null,$totalPrice=null)
+        // return $stmt->fetch(PDO::FETCH_ASSOC);  
     }
 
     public function getReservedDates() {

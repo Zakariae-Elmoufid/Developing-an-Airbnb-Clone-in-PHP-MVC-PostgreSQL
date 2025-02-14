@@ -43,7 +43,7 @@ create type accommodation_enum  as ENUM('available', 'booked');
 CREATE TABLE Accommodation (
     id SERIAL PRIMARY KEY,
 	user_id INT ,
-	foreign key (user_id) references "Users"(id),
+	foreign key (user_id) references Users(id),
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     category_id INT,
@@ -67,9 +67,9 @@ CREATE TABLE Booking (
     checkOutDate DATE NOT NULL,
     numberOfGuests INT NOT NULL,
     totalPrice FLOAT NOT NULL,
-    status booking_enum  DEFAULT 'active'
+    status booking_enum  DEFAULT 'active',
     user_id INT,
-   FOREIGN KEY (user_id) REFERENCES "user"(id)
+   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 create type reviews_enum  as ENUM('active', 'suspend', 'deleted');
