@@ -19,7 +19,7 @@ class Booking {
          $this->totalPrice = $totalPrice;
          $this->status = $status;
     }
-
+    
 }
 
 

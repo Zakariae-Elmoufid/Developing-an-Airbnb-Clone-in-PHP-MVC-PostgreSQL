@@ -15,9 +15,9 @@ class BookingModel extends Model{
         $stmt = $this->query("SELECT * FROM $table
         INNER JOIN users ON accommodation.user_id = users.id
         WHERE accommodation.isvalidated = 'true' and accommodation.id = ?",[$idAccommodation]);
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        // $data = $stmt->fetch(PDO::FETCH_ASSOC);
         // return new Booking($$data [datecheckin],$outDate,$status,$id=null, $numberOfGuests=null,$totalPrice=null)
-        // return $stmt->fetch(PDO::FETCH_ASSOC);  
+        return $stmt->fetch(PDO::FETCH_ASSOC);  
     }
 
     public function getReservedDates() {

@@ -5,7 +5,6 @@ use App\config\Database;
 use PDO;
 use Exception;
 use PDOException;
-
 class Model {
     
     protected $conn;
@@ -36,7 +35,9 @@ class Model {
 
     public function insert($table, $data)
     {
+
         $columns = implode(',', array_keys($data));
+
         $placeholders = implode(',', array_fill(0, count($data), '?'));
         $stmt = $this->query("INSERT INTO $table ($columns) VALUES ($placeholders)", array_values($data));
         return $this->conn->lastInsertId();
