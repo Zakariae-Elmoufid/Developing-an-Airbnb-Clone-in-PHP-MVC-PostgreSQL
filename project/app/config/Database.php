@@ -27,7 +27,7 @@ class Database
                 
                 $dsn = "pgsql:host=".$_ENV['DB_HOST'].";dbname=".$_ENV['DB_NAME'];
                 $pdo_instance = new PDO($dsn, $_ENV['DB_USER'],$_ENV['DB_PASSWORD']);
-                    
+                // echo "Connexion réussie";
                 self::$pdoSinglton =  $pdo_instance ;
                 return self::$pdoSinglton;
                 
