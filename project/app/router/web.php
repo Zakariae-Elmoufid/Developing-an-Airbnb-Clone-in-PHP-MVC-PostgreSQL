@@ -54,10 +54,8 @@ Router::add("GET","/register","AuthController@registerview");
 Router::add('POST', '/register', 'AuthController@register');
 Router::add('POST', '/login', 'AuthController@login');
 Router::add("GET","/login","AuthController@loginView");
-<<<<<<< HEAD
-=======
+
 Router::add("GET","acco","AuthController@loginView");
->>>>>>> b5d0ef05127822c484ef9b088febe450f3548717
 
 
 Router::add("GET","/google-login","AuthController@googleLoginView");
