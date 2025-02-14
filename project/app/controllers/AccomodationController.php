@@ -19,4 +19,12 @@ class AccomodationController extends Controller{
     $data=$this->accommodation->getAccommodationNotValide();
     print_r(json_encode($data));
   }
+  public function publicAccommodation(){
+    $data = json_decode(file_get_contents("php://input"), true);
+    $this->accommodation->setId($data);
+    if ( $this->accommodation->publicAccommodation()) {
+      echo(json_encode($data));
+    }
+    
+  }
 }

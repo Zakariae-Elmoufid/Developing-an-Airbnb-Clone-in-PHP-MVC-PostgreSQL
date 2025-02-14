@@ -7,10 +7,13 @@ use PDO;
 
 class Accommodation extends Model {
  
+    private $id;
     private $conect;
     public function __construct(){
             $this->conect= Database::getConnection();
     }
+    public function setId($id){$this->id=$id;}
+
    public function getAccommodationNotValide(){
     $sql="SELECT accommodation.address,accommodation.baseprice,accommodation.description,accommodation.id,accommodation.maxguests,accommodation.baseprice,array_to_json(accommodation.photos),users.username,users.profilepicture,category.title
            FROM accommodation
@@ -24,7 +27,13 @@ class Accommodation extends Model {
         }
 
 
+      public function publicAccommodation(){
+        $sql="update accommodation set isvalidated = true where id=?";
+        $stmt= $this->conect->prepare($sql);
+          $stmt->execute([$this->id]); 
+          return true;
 
+      }
 
 
 

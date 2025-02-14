@@ -5,11 +5,15 @@ const accomondationNotValide= async ()=>{
           method: "GET",
         });
         const response = await data.json();
-        initSwiper(JSON.parse(response[6].array_to_json))
+        response.forEach(element => {
+            initSwiper(JSON.parse(response[6].array_to_json))
+        });
+        
         
         displayAnonnces(response);
 }
 accomondationNotValide();
+
 let currentSlide = 0;
 let images = [];
 
@@ -65,9 +69,9 @@ function updateSlide() {
     });
 }
 
-const publishAccommodation= async (id)=> {
+const publicAccommodation= async (id)=> {
     console.log(id);
-    const data = await fetch("categories", {
+    const data = await fetch("accommodation", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -75,6 +79,9 @@ const publishAccommodation= async (id)=> {
         body: JSON.stringify(id),
       });
       const response = await data.json();
+      console.log(response);
+      accomondationNotValide();
+      
 }
 
 function displayAnonnces(array){
@@ -159,7 +166,7 @@ function displayAnonnces(array){
     </div>
 
     <!-- Bouton Publier -->
-    <button onclick="publishAccommodation(${element["id"]})" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300">
+    <button onclick="publicAccommodation(${element["id"]})" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300">
       Publier l'annonce
     </button>
   </div>
