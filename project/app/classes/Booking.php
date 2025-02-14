@@ -1,6 +1,10 @@
 <?php 
 
+<<<<<<< HEAD
 namespace App\classes\Booking;
+=======
+namespace App\classes;
+>>>>>>> khaoula
 
 class Booking {
     
@@ -14,10 +18,17 @@ class Booking {
          $this->id = $id;
          $this->inDate = $inDate;
          $this->outDate = $outDate;
+<<<<<<< HEAD
          $this->numberOfGuests = $numberOfGuest;
          $this->totalPrice = $totalPrice;
     }
 
+=======
+         $this->numberOfGuests = $numberOfGuests;
+         $this->totalPrice = $totalPrice;
+    }
+    
+>>>>>>> khaoula
 }
 
 
