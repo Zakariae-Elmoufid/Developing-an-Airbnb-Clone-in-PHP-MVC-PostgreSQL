@@ -20,6 +20,8 @@ class Controller
 
     protected function redirect($file)
     {
+        var_dump($file);
+        exit;
         require_once __DIR__ . '/../views/'.$file;
         exit;
     }
@@ -29,11 +31,17 @@ class Controller
         return Session::get('id') !== null && Session::get('role') === $role;
     }
 
-    // protected function requireAuth()
-    // {
-    //     if (!$this->isAuthenticated()) {
-    //         Session::setFlash('error', 'you must login.');
-    //         $this->redirect('/login');
-    //     }
-    // }
+    protected function requireAuth()
+    {
+        if (!$this->isAuthenticated()) {
+            Session::setFlash('error', 'you must login.');
+            $this->redirect('/login');
+        }
+    }
+
+    public function users($table) {
+        $data = findAll($table);
+        return $data;
+    }
+
 }

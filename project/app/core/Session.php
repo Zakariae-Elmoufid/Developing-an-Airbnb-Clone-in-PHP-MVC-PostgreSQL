@@ -20,6 +20,11 @@ class Session {
         return $_SESSION[$key] ?? null;
     }
 
+    public static function post($key)
+    {
+        return $_SESSION[$key] ?? null;
+    }
+
     public static function destroy()
     {
         session_destroy();
