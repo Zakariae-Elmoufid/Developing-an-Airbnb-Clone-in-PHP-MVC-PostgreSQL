@@ -18,6 +18,8 @@ class Controller
 
     protected function redirect($file)
     {
+        var_dump($file);
+        exit;
         require_once __DIR__ . '/../views/'.$file;
         exit;
     }
