@@ -305,7 +305,7 @@ public function register()
         }
         elseif( Session::get('user')->role_id == 2)
         {
-            header('Location: /dashboard');
+
             exit;
         }
             
