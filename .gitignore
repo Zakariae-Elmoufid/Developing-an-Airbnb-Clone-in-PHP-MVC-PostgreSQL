@@ -1,2 +1,4 @@
 ./git 
 project/vendor
+composer.lock
+.env
