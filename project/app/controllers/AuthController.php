@@ -21,6 +21,27 @@ class AuthController extends Controller
         $this->googleAuthService = new AuthService($this->userModel);
     }
 
+    public function googleLoginView($mode = 'login') 
+{
+    // If the route is /google-register, force registration mode
+    if ($_SERVER['REQUEST_URI'] === '/google-register') {
+        $mode = 'register';
+    }
+    
+    try {
+        Session::set('auth_mode', $mode); // Store whether this is login or register
+        Session::set('auth_mode', $mode);
+        $authUrl = $this->googleAuthService->getAuthUrl();
+        header('Location: ' . $authUrl);
+        exit();
+    } catch (Exception $e) {
+        error_log('Google Login Error: ' . $e->getMessage());
+        Session::set('error', 'Google authentication is temporarily unavailable');
+        header('Location: /login');
+        exit();
+    }
+}
+
     public function registerview()
     {
         $roles = $this->userModel->getRoles();
@@ -118,8 +139,22 @@ class AuthController extends Controller
         Session::set('auth_mode', null);
 
         error_log('Registration successful, redirecting to dashboard');
-        header('Location: /dashboard');
-        exit;
+        if( Session::get('user')->role_id == 3)
+        {
+            header('Location: /accommodation');
+            exit;
+        }
+        elseif( Session::get('user')->role_id == 1)
+        {
+            header('Location: /admin');
+            exit;
+        }
+        elseif( Session::get('user')->role_id == 2)
+        {
+            header('Location: /dashboard');
+            exit;
+        }
+        
 
     } catch (Exception $e) {
         error_log('Error in selectRole: ' . $e->getMessage());
@@ -153,7 +188,7 @@ public function googleCallback()
                 Session::set('temp_user', [
                     'username' => $result->user['name'] ?? explode('@', $result->user['email'])[0],
                     'email' => $result->user['email'],
-                    'password' => bin2hex(random_bytes(16))  // Generate random password
+                    'password' => bin2hex(random_bytes(16))  
                 ]);
                 
                 error_log('Stored temp_user data: ' . print_r(Session::get('temp_user'), true));
@@ -163,12 +198,24 @@ public function googleCallback()
             }
         }
 
-        // For login flow
         Session::set('user', $result->user);
         Session::set('authenticated', true);
         
-        header('Location: /dashboard');
-        exit();
+        if( Session::get('user')->role_id == 3)
+        {
+            header('Location: /accommodation');
+            exit;
+        }
+        elseif( Session::get('user')->role_id == 1)
+        {
+            header('Location: /admin');
+            exit;
+        }
+        elseif( Session::get('user')->role_id == 2)
+        {
+            header('Location: /dashboard');
+            exit;
+        }
 
     } catch (Exception $e) {
         error_log('Google Callback Error: ' . $e->getMessage());
@@ -246,8 +293,21 @@ public function register()
             Session::set('user', $user);
             Session::set('authenticated', true);
             
+            if( Session::get('user')->role_id == 3)
+        {
+            header('Location: /accommodation');
+            exit;
+        }
+        elseif( Session::get('user')->role_id == 1)
+        {
+            header('Location: /admin');
+            exit;
+        }
+        elseif( Session::get('user')->role_id == 2)
+        {
             header('Location: /dashboard');
             exit;
+        }
             
         } catch (Exception $e) {
             error_log('Login Error: ' . $e->getMessage());
