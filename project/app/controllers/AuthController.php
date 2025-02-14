@@ -253,7 +253,11 @@ public function googleCallback()
             Session::set('user', $user);
             Session::set('authenticated', true);
             
+<<<<<<< HEAD
             header('Location: /dashboard');
+=======
+            header('Location: accommodation');
+>>>>>>> b5d0ef05127822c484ef9b088febe450f3548717
             exit;
             
         } catch (Exception $e) {
