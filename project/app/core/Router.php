@@ -14,6 +14,7 @@ class Router {
         ];
     }
 
+    
     public static function  dispatch() {
         $requestUri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -21,6 +22,7 @@ class Router {
        
         foreach (self::$routes as $route) {
             if ($route['route'] === $requestUri && $route['method'] === $requestMethod) {
+                
                 [$controller, $method] = explode('@', $route['action']);
 
                 $namespace =  "App\\controllers\\";
@@ -28,6 +30,8 @@ class Router {
 
                 $controllerClass = $namespace . $controller;
 
+                // var_dump($method);
+                // exit;
                 
                 if (class_exists($controllerClass) && method_exists($controllerClass, $method)) {
                     $controllerInstance = new $controllerClass();

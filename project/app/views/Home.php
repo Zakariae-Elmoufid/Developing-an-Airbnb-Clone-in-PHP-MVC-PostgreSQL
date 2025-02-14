@@ -1,3 +1,8 @@
+<?php
+use App\config\Database;
+Database::getConnection();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +20,7 @@
     <nav class="bg-white shadow-md fixed w-full z-50">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <!-- Logo -->
+            <!-- <div class="text-rose-500 text-2xl font-bold">airbnb</div> -->
              <div class="w-26">
                 <img src="../../public/asset/images/logo.png" alt="airbnb">
              </div>

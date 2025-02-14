@@ -30,6 +30,7 @@ class Database
                 // echo "Connexion réussie";
                 self::$pdoSinglton =  $pdo_instance ;
                 return self::$pdoSinglton;
+                
             } catch (PDOException $e) {
                 print_r($_ENV);
                 echo "Connection error:".$e->getMessage();
