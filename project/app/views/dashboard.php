@@ -13,8 +13,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 Session::post($_POST['title']);
 Session::post($_POST['description']);
 Session::post($_POST['address']);
-Session::post($_POST['price']);
-Session::post($_POST['price']);
+Session::post($_POST['baseprice']);
 Session::post($_POST['fileInput']);
 Session::post($_POST['guests']);
 }
@@ -203,8 +202,8 @@ Session::post($_POST['guests']);
                     </div>
 
                     <div class="group">
-                        <label for="price" class="block text-gray-700 mb-2">Prix de base (par nuit)</label>
-                        <input type="number" id="price" name="price" required min="0"
+                        <label for="baseprice" class="block text-gray-700 mb-2">Prix de base (par nuit)</label>
+                        <input type="number" id="baseprice" name="baseprice" required min="0"
                             class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 hover:border-rose-300 transition-all">
                     </div>
                     <div class="group">
@@ -272,7 +271,50 @@ Session::post($_POST['guests']);
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <!-- [Table rows will be populated dynamically] -->
+                        <?php if(isset($accommodations) && !empty($accommodations)): ?>
+                        <?php foreach($accommodations as $accommodation): ?>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">
+                                    <?= htmlspecialchars($accommodation['title']) ?>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">
+                                    <?= htmlspecialchars($accommodation['category_name']) ?>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">
+                                    <?= number_format((float)$accommodation['baseprice'], 2) ?> €
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <?php 
+                    $isValidated = $accommodation['isvalidated'] ?? 'false';
+                    $statusClass = $isValidated === 'true' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+                    $statusText = $isValidated === 'true' ? 'Validé' : 'En attente';
+                    ?>
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?= $statusClass ?>">
+                                    <?= $statusText ?>
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button class="text-indigo-600 hover:text-indigo-900">Modifier</button>
+                                    <button class="text-red-600 hover:text-red-900">Supprimer</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                Aucun hébergement trouvé
+                            </td>
+                        </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -288,7 +330,7 @@ document.getElementById('fileInput').addEventListener('change', function(e) {
         var file = e.target.files[i];
 
         var div = document.createElement('div');
-        // div.textContent = file.name;
+        
         div.innerHTML = file.name + "<br>";
         imagePreview.appendChild(div);
     }
