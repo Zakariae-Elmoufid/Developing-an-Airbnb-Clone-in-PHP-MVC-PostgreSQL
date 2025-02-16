@@ -13,7 +13,7 @@ Session::start();
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
 </head>
-<body class=" bg-gray-500 pt-30">
+<body class="pt-30">
     <!-- Navigation -->
 
  <nav class="bg-white shadow-md fixed w-full z-50 top-0">
@@ -93,7 +93,7 @@ Session::start();
 
 
 
- <div class="mb-100">
+ <div class="mb-100 ">
    <?php foreach ($data as $booking): 
             $bookingDetails = $booking['booking'];
             $accommodationDetails = $booking['accommodation'];
@@ -105,8 +105,7 @@ Session::start();
             $isCompleted = strtotime($bookingDetails['out_date']) < time();
             $canReview = $isCompleted && (!isset($booking['reviews']) || empty($booking['reviews']));
   ?>
-    <div class="bg-white rounded-xl   mb-6 mx-auto w-[90%]">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 ">
+<div class="bg-white rounded-xl mb-6 mx-auto w-[90%] overflow-hidden shadow-lg shadow-gray-400/50 p-4">        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 ">
             <!-- Property Image -->
             <div class="md:col-span-1 flex justify-center items-center p-4">
                 <img src="<?= htmlspecialchars($ownerDetails['profile_picture']) ?>" 
@@ -148,7 +147,7 @@ Session::start();
                 <?php if ($isCompleted): ?>
                     <?php if (!$canReview): ?>
                         <!-- Existing Review -->
-                        <div class="space-y-2">
+                        <div class="space-y-2 overflow-hidden">
                             <div class="text-[#FF385C]">
                                 <?php for ($i = 0; $i < $review['rating']; $i++): ?>
                                     ⭐
