@@ -11,6 +11,7 @@ class User {
     private $status;
     private $phone;
     private Role $role_id;
+    
 
     public function __construct($id, $username, $password, $email, $profilepicture, $status, $phone, Role $role_id) {
         $this->id = $id;
@@ -30,7 +31,7 @@ class User {
             'password' => $this->password,
             'email' => $this->email,
             'profile_picture' => $this->profilepicture,
-            'status' => $this->status,
+            'user_status' => $this->status,
             'phone' => $this->phone,
             'role' => $this->role_id->toArray() // Utilisation de toArray() de Role
         ];

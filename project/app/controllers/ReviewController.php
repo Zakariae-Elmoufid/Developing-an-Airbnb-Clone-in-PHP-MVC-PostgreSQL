@@ -1,20 +1,23 @@
 <?php
 
 namespace App\controllers;
+require __DIR__ . "/../../vendor/autoload.php";
 use App\core\Controller;
-use App\models\ReviewModel;
+use App\models\ReveiwModel;
 use App\core\Validator;
 use App\core\Session;
-Session::start();
+use App\classes\Review;
+// Session::start();
 
 
 
 class ReviewController extends Controller {
     private $role  = "Traveler";
     private $ReviewModel;
+    private $table = "review";
     
     public function __construct(){
-        $this->ReviewModel = new ReviewgModel();
+        $this->ReviewModel = new ReveiwModel();
     }
 
 
@@ -34,12 +37,12 @@ class ReviewController extends Controller {
 
          
        if (Validator::comment($comment) && Validator::review($rating)) {
-          $this->ReviewModel->insert('review',['rating' => $rating , 'comment' => $comment , 'booking_id' => $booking_id ]); 
+          $this->ReviewModel->insert($this->table,['rating' => $rating , 'comment' => $comment , 'booking_id' => $booking_id ]); 
           Session::setFlash('success', "Review submitted successfully.");
           header("Location: myBooking");
           exit;
         }else {
-            header("Location: myBooking");
+            header("Location: nn");
           exit;
         }
 
@@ -47,4 +50,11 @@ class ReviewController extends Controller {
     }
 
 
+    public function getReviewbyId(){
+      
+       return $data;
+    }
+
+
 }
+

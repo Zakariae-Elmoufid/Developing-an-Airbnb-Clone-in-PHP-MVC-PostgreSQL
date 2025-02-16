@@ -55,7 +55,7 @@ class Accommodation {
             'address' => $this->address,
             'basePrice' => $this->baseprice,
             'maxGuests' => $this->maxguests,
-            'photos' => "{" . implode(",", $this->photos) . "}",
+'photos' => "{" . implode(",", explode(",", trim($this->photos, "{}"))) . "}",
             'status' => $this->status,
             'isValidated' => $this->isvalidated
         ];

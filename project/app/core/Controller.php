@@ -14,8 +14,6 @@ class Controller
         $viewPath = __DIR__ . '/../views/' . str_replace('.', '/', $view) . '.php';
     
         if (file_exists($viewPath)) {
-            // Extract data to make variables available to view
-            extract($data);
             require_once $viewPath;
         } else {
             die("View '$view' not found!");
@@ -30,12 +28,13 @@ class Controller
 
     protected function isAuthenticated($role)
     {
-        return Session::get('id') !== null && Session::get('role') === $role;
+        $user = Session::get('user');
+        return isset($user) && $user->id !== null && $user->role_id === $role;
     }
 
-    protected function requireAuth()
+    protected function requireAuth($role)
     {
-        if (!$this->isAuthenticated()) {
+        if (!$this->isAuthenticated($role)) {
             Session::setFlash('error', 'you must login.');
             $this->redirect('/login');
         }

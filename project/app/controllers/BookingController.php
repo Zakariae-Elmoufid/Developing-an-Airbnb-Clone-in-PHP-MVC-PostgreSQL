@@ -6,7 +6,8 @@ use App\models\BookingModel;
 use \Datetime;
 use App\classes\Booking;
 use App\classes\Accommodation;
-use App\classes\user;
+use App\core\Session;
+Session::start();
 
 class BookingController extends Controller {
     
@@ -19,12 +20,17 @@ class BookingController extends Controller {
     }
 
     public function show(){
-        $this->view($this->role.'/addBooking'); 
+          $this->requireAuth(Session::get('user')->role_id);
+          $this->view($this->role.'/addBooking'); 
     }
 
     public function myBooking(){
-        $data = $this->bookingModel->getMybooking('booking',2);
-        $this->view($this->role.'/myBooking',$data); 
+        // $bookings = $this->bookingModel->getMybooking();
+        $data = $this->bookingModel->getMybooking('booking',Session::get('user')->id);
+        $role = Session::get('user')->role_id;
+        $this->requireAuth($role);
+        $this->view($this->role.'/myBooking',$data);
+        
     }
 
 

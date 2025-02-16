@@ -23,6 +23,7 @@ Router::add('GET','myBooking', 'BookingController@myBooking');
 Router::add('POST','/myBooking','ReviewController@insetReview');
 Router::add('GET','success','PaymentsController@successPage');
 Router::add('GET','Accommodation','accommodationController@show');
+Router::add('GET','/logout','AuthController@logout');
 
 
 

@@ -47,7 +47,7 @@ Session::start();
 
             <!-- User Menu -->
             <div class="flex items-center space-x-4">
-                <p class="hidden md:block font-medium text-gray-700">Username</p>
+                <p class="hidden md:block font-medium text-gray-700"><?= Session::get('user')->username ?></p>
                 <div class="relative group">
                     <button class="flex items-center focus:outline-none">
                         <img class="h-8 w-8 rounded-full object-cover border-2 border-[#FF385C]" 
@@ -59,7 +59,7 @@ Session::start();
                     <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Sign out</a>
+                        <a href="/logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Sign out</a>
                     </div>
                 </div>
             </div>
@@ -91,17 +91,26 @@ Session::start();
     </div>
  </nav>
 
-  <div class="mb-100">
+
+
+ <div class="mb-100">
    <?php foreach ($data as $booking): 
-    $isCompleted = strtotime($booking['checkoutdate']) < time();
-    $hasReview = isset($booking['rating']);
+            $bookingDetails = $booking['booking'];
+            $accommodationDetails = $booking['accommodation'];
+            $ownerDetails = $booking['owner'];
+            $review = $booking['reviews'];
+
+
+    
+            $isCompleted = strtotime($bookingDetails['out_date']) < time();
+            $canReview = $isCompleted && (!isset($booking['reviews']) || empty($booking['reviews']));
   ?>
     <div class="bg-white rounded-xl   mb-6 mx-auto w-[90%]">
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4 ">
             <!-- Property Image -->
             <div class="md:col-span-1 flex justify-center items-center p-4">
-                <img src="<?= htmlspecialchars($booking['profilepicture']) ?>" 
-                     alt="<?= htmlspecialchars($booking['owner_username']) ?>" 
+                <img src="<?= htmlspecialchars($ownerDetails['profile_picture']) ?>" 
+                     alt="<?= htmlspecialchars($ownerDetails['username']) ?>" 
                      class="w-24 h-24 rounded-full object-cover shadow-md">
             </div>
 
@@ -111,19 +120,19 @@ Session::start();
                 <div class="space-y-2 text-gray-600">
                     <p>
                         <span class="font-medium">Check-in:</span> 
-                        <?= htmlspecialchars($booking['checkindate']) ?>
+                        <?= htmlspecialchars($bookingDetails['in_date']) ?>
                     </p>
                     <p>
                         <span class="font-medium">Check-out:</span> 
-                        <?= htmlspecialchars($booking['checkoutdate']) ?>
+                        <?= htmlspecialchars($bookingDetails['out_date']) ?>
                     </p>
                     <p>
                         <span class="font-medium">Guests:</span> 
-                        <?= htmlspecialchars($booking['numberofguests']) ?>
+                        <?= htmlspecialchars($bookingDetails['number_of_guests']) ?>
                     </p>
                     <p>
                         <span class="font-medium">Total Price:</span> 
-                        €<?= htmlspecialchars($booking['totalprice']) ?>
+                        €<?= htmlspecialchars($bookingDetails['total_price']) ?>
                     </p>
                     <p class="flex items-center gap-2">
                         <span class="font-medium">Status:</span>
@@ -137,20 +146,20 @@ Session::start();
             <!-- Review Section -->
             <div class="md:col-span-2 p-6 bg-gray-50">
                 <?php if ($isCompleted): ?>
-                    <?php if ($hasReview): ?>
+                    <?php if (!$canReview): ?>
                         <!-- Existing Review -->
                         <div class="space-y-2">
                             <div class="text-[#FF385C]">
-                                <?php for ($i = 0; $i < $booking['rating']; $i++): ?>
+                                <?php for ($i = 0; $i < $review['rating']; $i++): ?>
                                     ⭐
                                 <?php endfor; ?>
                             </div>
-                            <p class="text-gray-600"><?= htmlspecialchars($booking['comment']) ?></p>
+                            <p class="text-gray-600"><?= htmlspecialchars($review['comment']) ?></p>
                         </div>
                     <?php else: ?>
                         <!-- Review Form -->
                         <form action="/myBooking" method="POST" class="space-y-4">
-                            <input type="" name="booking_id" value="<?= htmlspecialchars($booking['id']) ?>">
+                            <input type="" name="booking_id" value="<?= htmlspecialchars($bookingDetails['id']) ?>">
                              <h1><?= Session::getFlash('success')?></h1>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Rating</label>
@@ -213,6 +222,5 @@ Session::start();
         menu.classList.toggle("hidden");
     });
  </script>
-
 </body>
 </html>

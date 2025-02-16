@@ -28,7 +28,7 @@ class Booking {
             'out_date' => $this->outDate,
             'number_of_guests' => $this->numberOfGuests,
             'total_price' => $this->totalPrice,
-            'status' => $this->status
+            'booking_status' => $this->status
         ];
     }
     
