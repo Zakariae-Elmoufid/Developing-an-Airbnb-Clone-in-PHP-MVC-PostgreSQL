@@ -12,7 +12,8 @@ $accommodations = $ownerModel->getValidatedAccommodations();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airbnb Clone - Find Unique Places to Stay</title>
+    <link rel="icon" type="image/svg+xml" href="../../public/asset/images/favicon-removebg-preview.png">
+    <title>Airbnb</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
