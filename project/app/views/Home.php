@@ -4,7 +4,6 @@ use App\models\OwnerModel;
 Database::getConnection();
 $ownerModel = new OwnerModel();
 $accommodations = $ownerModel->getValidatedAccommodations();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

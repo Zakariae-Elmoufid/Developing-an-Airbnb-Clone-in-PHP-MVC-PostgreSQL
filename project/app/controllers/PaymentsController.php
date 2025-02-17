@@ -33,7 +33,7 @@ class PaymentsController extends Controller {
             ]],
           
         ]);
-        http_response_code(303);
+        http_response_code(200);
         header("location: ". $checkout_session->url);
       
  

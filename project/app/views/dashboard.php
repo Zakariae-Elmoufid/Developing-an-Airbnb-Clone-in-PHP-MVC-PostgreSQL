@@ -20,6 +20,8 @@ Session::post($_POST['guests']);
 
 
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -234,7 +236,7 @@ Session::post($_POST['guests']);
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-4 mt-6">
-                    <button type="submit"
+                    <button type="submit" 
                         class="px-6 py-3 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-all">
                         Ajouter l'hébergement
                     </button>

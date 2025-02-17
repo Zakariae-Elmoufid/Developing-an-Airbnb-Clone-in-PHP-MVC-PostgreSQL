@@ -71,13 +71,13 @@ class OwnerModel extends Model {
             
             $accommodations = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
-            foreach ($accommodations as &$accommodation) {
-                if (isset($accommodation['photos'])) {
-                    $accommodation['photos'] = json_decode($accommodation['photos'], true) ?? [];
-                } else {
-                    $accommodation['photos'] = [];
-                }
-            }
+            // foreach ($accommodations as &$accommodation) {
+            //     if (isset($accommodation['photos'])) {
+            //         $accommodation['photos'] = json_decode($accommodation['photos'], true) ?? [];
+            //     } else {
+            //         $accommodation['photos'] = [];
+            //     }
+            // }
             
             return $accommodations;
         } catch (\Exception $e) {

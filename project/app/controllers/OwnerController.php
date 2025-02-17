@@ -23,8 +23,13 @@ class OwnerController extends Controller {
         
         return [
             'categories' => $categories,
-            'accommodations' => $accommodations
-        ];
+            'accommodations' => $accommodations ];
+
+       
+     var_dump($accommodations[0]);
+        
+        return $categories;
+
     }
 
     public function create() {
