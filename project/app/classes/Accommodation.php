@@ -23,7 +23,7 @@ class Accommodation {
         $this->maxguests = $maxguests; 
         $this->photos = $photos;
         $this->status = 'available';
-        $this->isvalidated = true;  
+        $this->isvalidated = 'true';  
     }
     public function getId() { return $this->id; }
     public function getUserId() { return $this->userId; }

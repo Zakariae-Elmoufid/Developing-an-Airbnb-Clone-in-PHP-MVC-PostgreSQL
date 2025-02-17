@@ -37,7 +37,17 @@ class OwnerModel extends Model {
             
             foreach ($accommodations as &$accommodation) {
                 if (isset($accommodation['photos'])) {
-                    $accommodation['photos'] = json_decode($accommodation['photos'], true) ?? [];
+                    $accommodation['photos'] = /* `json_decode` is a PHP function that is used to
+                    decode a JSON string and convert it into a PHP
+                    variable. In the provided code, `json_decode` is used
+                    to decode the JSON string stored in the `photos`
+                    column of the `accommodation` table into an
+                    associative array. If the `photos` column contains
+                    valid JSON data, `json_decode` will return an
+                    associative array representation of that data. If the
+                    `photos` column is empty or not valid JSON,
+                    `json_decode` will return an empty array. */
+                    json_decode($accommodation['photos'], true) ?? [];
                 } else {
                     $accommodation['photos'] = [];
                 }

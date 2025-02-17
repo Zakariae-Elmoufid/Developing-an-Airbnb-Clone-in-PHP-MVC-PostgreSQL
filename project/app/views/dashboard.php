@@ -168,7 +168,7 @@ Session::post($_POST['guests']);
             </div>
 
 
-            <form action="/dashboard/create" method="POST" enctype="multipart/form-data">
+            <<form action="/dashboard/create" method="POST" enctype="multipart/form-data">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="group">
