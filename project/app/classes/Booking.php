@@ -1,6 +1,8 @@
 <?php 
 
+
 namespace App\classes;
+
 
 class Booking {
     
@@ -15,11 +17,14 @@ class Booking {
          $this->id = $id;
          $this->inDate = $inDate;
          $this->outDate = $outDate;
+
+         $this->numberOfGuests = $numberOfGuest;
+         $this->totalPrice = $totalPrice;
+    
+
+
          $this->numberOfGuests = $numberOfGuests;
          $this->totalPrice = $totalPrice;
          $this->status = $status;
     }
-    
 }
-
-
