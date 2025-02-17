@@ -12,7 +12,7 @@ class Accommodation {
     private $photos;
     private $status;
     private $isvalidated;
-    //ytguijokphjkl 
+    
     public function __construct($userId, $title, $description, $categoryId, $address, $baseprice, $maxguests, $photos) {
         $this->userId = $userId;
         $this->title = $title;
@@ -23,7 +23,7 @@ class Accommodation {
         $this->maxguests = $maxguests; 
         $this->photos = $photos;
         $this->status = 'available';
-        $this->isvalidated = 'false';
+        $this->isvalidated = true;  
     }
     public function getId() { return $this->id; }
     public function getUserId() { return $this->userId; }
@@ -53,11 +53,11 @@ class Accommodation {
             'description' => $this->description,
             'category_id' => $this->categoryId,
             'address' => $this->address,
-            'basePrice' => $this->baseprice,
-            'maxGuests' => $this->maxguests,
-            'photos' => "{" . implode(",", $this->photos) . "}",
+            'baseprice' => $this->baseprice,
+            'maxguests' => $this->maxguests,
+            'photos' => json_encode($this->photos),
             'status' => $this->status,
-            'isValidated' => $this->isvalidated
+            'isvalidated' => $this->isvalidated
         ];
     }
 }

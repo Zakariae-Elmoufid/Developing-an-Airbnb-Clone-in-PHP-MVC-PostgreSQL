@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 -- Insert sample roles
 INSERT INTO Role (title) 
 VALUES ('Admin'), ('Owner'), ('Traveler');
@@ -99,7 +99,7 @@ VALUES
 (8, 5.0, '2025-03-05', '2025-03-20', 'special'),
 (9, 15.0, '2025-03-10', '2025-03-25', 'limited-time'),
 (10, 20.0, '2025-03-15', '2025-03-30', 'seasonal');
-=======
+
 -- Insert into Role table
 INSERT INTO Role (title) VALUES
 ('Admin'),
@@ -192,4 +192,4 @@ INSERT INTO Promotion (accommodation_id, discountPercentage, startDate, endDate)
 (8, 12.0, '2025-09-01', '2025-09-10'),
 (9, 20.0, '2025-10-01', '2025-10-10'),
 (10, 15.0, '2025-11-01', '2025-11-15');
->>>>>>> khaoula
+
