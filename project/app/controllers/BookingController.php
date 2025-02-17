@@ -21,13 +21,14 @@ class BookingController extends Controller {
     }
 
     public function myBooking(){
-        $data = $this->bookingModel->getMybooking('booking',2);
+        $data = $this->bookingModel->getMybooking('booking',12);
         $this->view($this->role.'/myBooking',$data); 
     }
 
 
     public function getAccommodationById(){
-         $data = $this->bookingModel->findAccommodationById('accommodation', 4); 
+         $id = $_GET['id'] ?? null;
+         $data = $this->bookingModel->findAccommodationById('accommodation', $id ); 
          $this->view($this->role.'/addBooking',$data); 
     }
 

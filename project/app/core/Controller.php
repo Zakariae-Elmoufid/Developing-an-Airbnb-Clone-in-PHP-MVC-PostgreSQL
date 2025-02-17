@@ -15,7 +15,6 @@ class Controller
     
         if (file_exists($viewPath)) {
             // Extract data to make variables available to view
-            extract($data);
             require_once $viewPath;
         } else {
             die("View '$view' not found!");
