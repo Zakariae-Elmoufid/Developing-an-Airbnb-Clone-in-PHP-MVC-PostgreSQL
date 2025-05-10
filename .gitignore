@@ -1,0 +1,4 @@
+./git 
+project/vendor
+project/composer.lock
+project/.env
