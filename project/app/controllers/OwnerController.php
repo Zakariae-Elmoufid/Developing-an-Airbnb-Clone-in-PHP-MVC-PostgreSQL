@@ -31,16 +31,16 @@ class OwnerController extends Controller {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $photos = [];
 
-                if (isset($_FILES['photos'])) {
-                    foreach ($_FILES['photos']['tmp_name'] as $key => $tmp_name) {
-                        $filename = uniqid() . '_' . $_FILES['photos']['name'][$key];
+               
+                    foreach ($_FILES['carte_identite']['tmp_name'] as $key => $tmp_name) {
+                        $filename = uniqid() . '_' . $_FILES['carte_identite']['name'][$key];
                         $uploadPath = __DIR__ . '/../../public/uploads/' . $filename;
                         
                         if (move_uploaded_file($tmp_name, $uploadPath)) {
                             $photos[] = $filename;
                         }
                     }
-                }
+                
                  
                 $accommodation = new Accommodation(
                     $this->staticUserId, 

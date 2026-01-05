@@ -23,7 +23,6 @@ class Accommodation extends Model {
           $stmt= $this->conect->prepare($sql);
           $stmt->execute(); 
           return $stmt->fetchAll(PDO::FETCH_OBJ);
-
         }
 
 
